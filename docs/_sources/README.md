@@ -8,4 +8,4 @@ Some simple examples related to parallel computing are addressed and solved.
 
 The core of the examples is done in C language and in Python. 
 
-If you are reading this page as a README of the GitHub repository, you can find a formatted and searchable version at: [https://github.com/Cirdans-Home/intrompi](https://github.com/Cirdans-Home/intrompi). 
+If you are reading this page as a README of the GitHub repository, you can find a formatted and searchable version at: [https://cirdans-home.github.io/intrompi/](https://cirdans-home.github.io/intrompi/). 
