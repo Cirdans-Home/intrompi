@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific and parallel computing &#8212; A Short Introduction to Parallel Computing</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Message Passing Interface" href="intro.html" />
+    <link rel="prev" title="intrompi" href="README.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">A Short Introduction to Parallel Computing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
+   intrompi
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Scientific and parallel computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#parallel-algorithms">
+   Parallel Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Message Passing Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html#point-to-point-communication">
+   Point-to-point communication
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/parallel-computing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Scientific and parallel computing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flynn-s-taxonomy">
+     Flynn’s Taxonomy
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-computers-our-computer-model">
+     Parallel Computers: our computer model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-top500-list">
+     The TOP500 List
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallel-algorithms">
+   Parallel Algorithms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-algorithms-speedup">
+     Parallel Algorithms:
+     <em>
+      speedup
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-algorithms-amdahl-s-law-for-parallel-hardware">
+     Parallel Algorithms: Amdahl’s Law for parallel hardware
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="scientific-and-parallel-computing">
+<h1>Scientific and parallel computing<a class="headerlink" href="#scientific-and-parallel-computing" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/nasasuperpc.jpg"><img alt="SuperComputer" class="align-right" src="_images/nasasuperpc.jpg" style="width: 350px;" /></a>
+<blockquote>
+<div><p>``<strong>Computational science</strong> (also <em>scientific computing</em> or <em>scientific computation</em> (SC)) is a rapidly growing multidisciplinary field that uses advanced computing capabilities to <em>understand and solve complex problems</em>. It is an area of science which spans many disciplines, but at its core it involves the development of <em>models and simulations to understand natural systems</em>.’’ - Wikipedia</p>
+</div></blockquote>
+<p><strong>What are the applications?</strong></p>
+<ul class="simple">
+<li><p>Computational finance,</p></li>
+<li><p>Computational biology,</p></li>
+<li><p>Simulation of complex systems,</p></li>
+<li><p>Network analysis</p></li>
+<li><p>Multi-physics simulations,</p></li>
+<li><p>Weather and climate models,</p></li>
+<li><p>…</p></li>
+</ul>
+<p>Why the need for <em>parallelism</em>?</p>
+<blockquote>
+<div><p>“The complexity for minimum component costs has increased at a rate of roughly a factor of two per year. Certainly over the short term this rate can be expected to continue, if not to increase. Over the longer term, the rate of increase is a bit more uncertain, although there is no reason to believe it will not remain nearly constant for at least 10 years.” - G. Moore, 1975</p>
+</div></blockquote>
+<a class="reference internal image-reference" href="_images/mooreslawoftransistors.png"><img alt="Moore's Law of Transistor" class="align-left" src="_images/mooreslawoftransistors.png" style="width: 350px;" /></a>
+<p>Computers <strong>should</strong> reach the physical limits of Moore’s Law at some point in the 2020s… exponential functions saturates physical capabilities!</p>
+<ul class="simple">
+<li><p>We are hitting the wall of single processor transistor count/computing capabilities,</p></li>
+<li><p>Some applications needs more memory than the one that could be available on a single machine,</p></li>
+<li><p>Optimization of sequential algorithms can bring us only to a certain extent</p></li>
+</ul>
+<p>Therefore, we need</p>
+<ul class="simple">
+<li><p>Algorithms that can work in parallel,</p></li>
+<li><p>A communications protocol for parallel computation integrated with our programming languages</p></li>
+<li><p>Parallel machines that can actually run this code</p></li>
+</ul>
+<div class="section" id="flynn-s-taxonomy">
+<h2>Flynn’s Taxonomy<a class="headerlink" href="#flynn-s-taxonomy" title="Permalink to this headline">¶</a></h2>
+<p>Let us start from the bottom: the <strong>machines</strong>.</p>
+<p>What is a parallel computer? … well, it can be a certain number of different “things”</p>
+<ul class="simple">
+<li><p>Multi-core computing</p></li>
+<li><p>Symmetric multiprocessing</p></li>
+<li><p>Distributed computing</p></li>
+<li><p>Cluster computing</p></li>
+<li><p>Massively parallel computing</p></li>
+<li><p>Grid computing</p></li>
+<li><p>General-purpose computing on graphics processing units (GPGPU)</p></li>
+<li><p>Vector processors</p></li>
+</ul>
+<p>Let us <strong>abstract</strong> from the machine by describing Flynn’s taxonomy</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>SISD</p></th>
+<th class="head"><p>SIMD</p></th>
+<th class="head"><p>MISD</p></th>
+<th class="head"><p>MIMD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><img alt="SISD" src="_images/SISD.png" /></p></td>
+<td><p><img alt="SIMD" src="_images/SIMD.png" /></p></td>
+<td><p><img alt="MISD" src="_images/MISD.png" /></p></td>
+<td><p><img alt="MIMD" src="_images/MIMD.png" /></p></td>
+</tr>
+<tr class="row-odd"><td><p>Single instruction stream, single data stream</p></td>
+<td><p>Single instruction stream, multiple data stream</p></td>
+<td><p>Multiple instruction stream, single data stream</p></td>
+<td><p>Multiple instruction stream, multiple data stream</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="parallel-computers-our-computer-model">
+<h2>Parallel Computers: our computer model<a class="headerlink" href="#parallel-computers-our-computer-model" title="Permalink to this headline">¶</a></h2>
+<p>For our task of introducing parallel computations we need to fix a <strong>specific multiprocessor model</strong>, i.e., a specific generalization of the sequential RAM model in which there is more than one processor.</p>
+<a class="reference internal image-reference" href="_images/networkarchitecture.png"><img alt="Network Architecture" class="align-left" src="_images/networkarchitecture.png" style="width: 350px;" /></a>
+<p>Since we want to stay in a SIMD/MIMD model, we focus on a <em>local memory machine model</em>, i.e., a set of <span class="math notranslate nohighlight">\(M\)</span> processors each with its own local memory that are attached to a common communication network.</p>
+<ul class="simple">
+<li><p>We can be more precise about the connection between processors, one can consider a network (a collection of switches connected by communication channels) and delve in a detailed way into its pattern of interconnection, i.e., into what is called the network topology.</p></li>
+<li><p>An alternative is to summarize the network properties in terms of two parameters: <strong>latency</strong> and <strong>bandwidth</strong></p>
+<ul>
+<li><p><strong>Latency</strong> the time it takes for a message to traverse the network;</p></li>
+<li><p><strong>Bandwidth</strong> the rate at which a processor can inject data into the network.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="the-top500-list">
+<h2>The TOP500 List<a class="headerlink" href="#the-top500-list" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>“…  we have decided in 1993 to assemble and maintain a list of the 500 most powerful computer systems. Our list has been compiled twice a year since June 1993 with the help of high-performance computer experts, computational scientists, manufacturers, and the Internet community in general… In the present list (which we call the TOP500), we list computers ranked by their performance on the <a class="reference external" href="http://www.netlib.org/benchmark/hpl/"><strong>LINPACK Benchmark</strong></a>”</p>
+</div></blockquote>
+<p>The <strong>LINPACK</strong> Benchmark.</p>
+<p>Solution of a dense <span class="math notranslate nohighlight">\(n\times n\)</span>  system of linear equations <span class="math notranslate nohighlight">\(A\mathbf{x} = \mathbf{b}\)</span>, so that</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{\| A \mathbf{x} - \mathbf{b}\|}{\|A\|\|\mathbf{x}\| n \varepsilon} \leq O(1)\)</span>, for <span class="math notranslate nohighlight">\(\varepsilon\)</span> machine precision,</p></li>
+<li><p>It uses a specialized right-looking LU factorization with look–ahead</p></li>
+<li><p>Measuring</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(R_\text{max}\)</span> the performance in GFLOPS for the largest problem run on a machine,</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_\text{max}\)</span> the size of the largest problem run on a machine,</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_{1/2}\)</span> the size where half the <span class="math notranslate nohighlight">\(R_\text{max}\)</span> execution rate is achieved,</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_{\text{peak}}\)</span> the theoretical peak performance GFLOPS for the machine.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="parallel-algorithms">
+<h1>Parallel Algorithms<a class="headerlink" href="#parallel-algorithms" title="Permalink to this headline">¶</a></h1>
+<p>In a fairly general way we can say that a <strong>parallel algorithm</strong> is an algorithm which can do <em>multiple operations</em> in a given time.</p>
+<blockquote>
+<div><p><strong>Example.</strong> the sum of two vectors <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^n\)</span></p>
+</div></blockquote>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \begin{array}{cl}
+    \mathbf{x} &amp; = [x_1 \; x_2 \; \cdots \; x_i  \;| x_{i+1} \; \cdots x_n] \\
+    + \\
+    \mathbf{y} &amp; = [y_1 \; y_2 \; \cdots \; y_i  \;| y_{i+1} \; \cdots y_n] \\
+    = \\
+    \mathbf{x} + \mathbf{y} &amp; = [x_1+y_1 \; x_2+y_2 \; \cdots \; x_i+y_i  \;| \cdots x_n+y_n] \\
+    \end{array}
+\end{equation*}\]</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>If we do the operation sequentially we do <span class="math notranslate nohighlight">\(O(n)\)</span> operations in <span class="math notranslate nohighlight">\(T_n\)</span></p></li>
+<li><p>If we split the operation among <span class="math notranslate nohighlight">\(2\)</span> processors, one summing up the entries between <span class="math notranslate nohighlight">\(1,\ldots,i\)</span>, and one summing up the entries between <span class="math notranslate nohighlight">\(i+1,\ldots,n\)</span> we take <span class="math notranslate nohighlight">\(T_i\)</span> time for the first part and <span class="math notranslate nohighlight">\(T_{n-i}\)</span> time for the second, therefore the overall time is <span class="math notranslate nohighlight">\(\max(T_{i},T_{n-i})\)</span> for doing always <span class="math notranslate nohighlight">\(O(n)\)</span> operations.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="parallel-algorithms-speedup">
+<h2>Parallel Algorithms: <em>speedup</em><a class="headerlink" href="#parallel-algorithms-speedup" title="Permalink to this headline">¶</a></h2>
+<p>Let us try to think again in an abstract way and to quantify the <strong>overall speed gain</strong> for a given gain in a subset of a process.</p>
+<ul class="simple">
+<li><p>We break some process into <span class="math notranslate nohighlight">\(N\)</span> distinct portions with the <span class="math notranslate nohighlight">\(i\)</span>th portion occupying the <span class="math notranslate nohighlight">\(P_i\)</span> fraction of the overall completion time,</p></li>
+<li><p>then we order such portion in such a way that the <span class="math notranslate nohighlight">\(N\)</span>th portions subsumes all the parts of the overall processes that have fixed costs.</p></li>
+<li><p>The <strong>speedup</strong> of the <span class="math notranslate nohighlight">\(i\)</span>th portion can then be defined as</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    S_i \triangleq \frac{t_{\text{original}}}{t_{\text{optimized}}}, \quad i=1,\ldots,N-1
+\end{equation*}\]</div>
+<p>where the numerator and denominator are the original and optimized completion time.</p>
+<div class="admonition-amdahl-s-law admonition">
+<p class="admonition-title">Amdahl’s Law</p>
+<p>Then the <em>overall speedup</em> for <span class="math notranslate nohighlight">\(\mathbf{P} = (P_1,\ldots,P_N)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{S} = (S_1,\ldots,S_{N-1})\)</span> is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+S(\mathbf{P},\mathbf{S}) = \left(P_N + \sum_{i=1}^{N-1} \frac{P_i}{S_i}\right)^{-1}.
+\end{equation*}\]</div>
+</div>
+<p>Let us make some observations on Amdahl’s Law</p>
+<ul class="simple">
+<li><p>We are not assuming about whether the original completion time  involves some optimization,</p></li>
+<li><p>We are not making any assumption on what our optimization process is,</p></li>
+<li><p>We are not even saying that the process in question involves a computer!
+Amdahl’s Law is a fairly general way of looking at how processes can be speed up by dividing them into sub-tasks with lower execution time.</p></li>
+</ul>
+<p>Moreover, it fixes  the <em>theoretical maximum speedup</em> in various scenarios.</p>
+<ul class="simple">
+<li><p>If we allow all components <span class="math notranslate nohighlight">\(S_i\)</span> to grow unbounded then the upper bound on all scenario si <span class="math notranslate nohighlight">\(S_{\text{max}} = 1/P_N\)</span>.
+Let us decline it in the context of the potential utility of <em>parallel hardware</em>.</p></li>
+</ul>
+</div>
+<div class="section" id="parallel-algorithms-amdahl-s-law-for-parallel-hardware">
+<h2>Parallel Algorithms: Amdahl’s Law for parallel hardware<a class="headerlink" href="#parallel-algorithms-amdahl-s-law-for-parallel-hardware" title="Permalink to this headline">¶</a></h2>
+<p>Consider now having a parallel machine that permits us dividing the execution of code across <span class="math notranslate nohighlight">\(M\)</span> hardware units, then the problem independent maximum speedup that such hardware can provide is <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<div class="admonition-parallel-efficiency admonition">
+<p class="admonition-title">Parallel Efficiency.</p>
+<p>We define the parallel efficiency <span class="math notranslate nohighlight">\(E\)</span> as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+E \triangleq \frac{S_{\text{overall}}}{M},
+ \end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E = 100\%\)</span> correspond to the maximal use of the available hardware. When <span class="math notranslate nohighlight">\(S_{\text{max}} &lt; M\)</span>, it is then impossible to take full advantage of all available execution units.</p>
+</div>
+<blockquote>
+<div><p><strong>Goal:</strong> we require very large <span class="math notranslate nohighlight">\(S_{\text{max}}\)</span> and correspondingly tiny <span class="math notranslate nohighlight">\(P_N\)</span>.</p>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Every dusty corner of a code must scale</strong>, any portion that doesn’t becomes the rate-limiting step!</p>
+</div>
+<p>What we are neglecting and what we are tacitly assuming</p>
+<ul class="simple">
+<li><p>We are neglecting \emph{overhead costs}, i.e., the cost associated with parallel execution such as</p>
+<ul>
+<li><p>initializing (spawning) and joining of different computation threads,</p></li>
+<li><p>communication between processes, data movement and memory allocation.</p></li>
+</ul>
+</li>
+<li><p>We considered also the ideal case in which <span class="math notranslate nohighlight">\(S_i \rightarrow +\infty\)</span> <span class="math notranslate nohighlight">\(\forall i\)</span>, observe that with finite speedup on portions <span class="math notranslate nohighlight">\(1\)</span> through <span class="math notranslate nohighlight">\(N-1\)</span>, the <span class="math notranslate nohighlight">\(S_{\text{overall}}\)</span> might continue to improve with increasing number of execution units.</p></li>
+<li><p>We are assuming that the size of the problem remains fixed while the number of execution units increases, this is called the case of <strong>strong scalability</strong>. In some contexts, we need to turn instead to <strong>weak scalability</strong> in which the problem size grows proportionally to the number of execution units.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="README.html" title="previous page">intrompi</a>
+    <a class='right-next' id="next-link" href="intro.html" title="next page">Message Passing Interface</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

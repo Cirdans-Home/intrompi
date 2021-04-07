@@ -1,0 +1,896 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Passing Interface &#8212; A Short Introduction to Parallel Computing</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Scientific and parallel computing" href="parallel-computing.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">A Short Introduction to Parallel Computing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
+   intrompi
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="parallel-computing.html">
+   Scientific and parallel computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parallel-computing.html#parallel-algorithms">
+   Parallel Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Message Passing Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#point-to-point-communication">
+   Point-to-point communication
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Cirdans-Home/intrompi/main?urlpath=lab/tree/intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Message Passing Interface
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#our-first-mpi-program">
+     Our First MPI Program
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-mpi-parallel-environment">
+     The MPI parallel environment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#point-to-point-communication">
+   Point-to-point communication
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-blocking-send-and-receive">
+     The blocking send and receive
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-simple-send-receive-example">
+     A simple send/receive example
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-simple-send-receive-example-programmer-smash">
+       A simple send/receive example : programmer smash!
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="message-passing-interface">
+<h1>Message Passing Interface<a class="headerlink" href="#message-passing-interface" title="Permalink to this headline">¶</a></h1>
+<p>How do we realize practically this parallelism?</p>
+<p>Let us focus on what we have discussed until now:</p>
+<ul class="simple">
+<li><p>We have ``machines’’ with multiple processors and whose main memory is partitioned into fragmented components,</p></li>
+<li><p>We have algorithms that can divide a problem of size <span class="math notranslate nohighlight">\(N\)</span> among these processors so that they can run (almost) independently,</p></li>
+<li><p>With a certain degree of approximation, we know how to compute what is the <em>best improvement</em> we can expect from a parallel program with <span class="math notranslate nohighlight">\(M\)</span> processors on a problem of size <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+</ul>
+<p>What we need to discuss now is then: “<em>How can we actually implement these algorithms on real machines?</em>”</p>
+<ul class="simple">
+<li><p>We need a way to define a parallel environment in which every processor is accounted for,</p></li>
+<li><p>We need to have data formats that are aware of the fact that we have a <em>distributed</em> memory,</p></li>
+<li><p>We need to exchange data between the various memory fragments.</p></li>
+</ul>
+<blockquote>
+<div><p>“MPI (Message Passing Interface) is a <strong>specification for a standard library</strong> for message passing that was defined by the MPI Forum, a broadly based group of parallel computer vendors, library writers, and applications specialists.” – W. Gropp, E. Lusk, N. Doss, A. Skjellum,’’ – A high-performance, portable implementation of the MPI message passing interface standard, Parallel Computing, 22 (6), 1996.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>MPI implementations consist of a specific set of routines directly callable from C, C++, Fortran, Python;</p></li>
+<li><p>MPI uses Language Independent Specifications for calls and language bindings;</p></li>
+<li><p>The MPI interface provides an essential <em>virtual</em> topology, synchronization, and communication functionality inside a set of processes.</p></li>
+<li><p>There exist many implementations of the MPI specification, e.g., MPICH, Open MPI, <em>etc.</em></p></li>
+</ul>
+<div class="section" id="our-first-mpi-program">
+<h2>Our First MPI Program<a class="headerlink" href="#our-first-mpi-program" title="Permalink to this headline">¶</a></h2>
+<p>In all the course we are going to use the MPI inside Python programs.</p>
+<p>Let us start from the classical helloworld program:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> ccode/helloworld.c
+<span class="c1">#include&quot;mpi.h&quot;</span>
+<span class="c1">#include&lt;stdio.h&gt;</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span><span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">){</span>
+ <span class="n">MPI_Init</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+ <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello, world!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+ <span class="n">MPI_Finalize</span><span class="p">();</span>
+ <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting ccode/helloworld.c
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can compile it by doing</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpicc helloworld.c -o helloworld
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mpicc</span></code> is a wrapper for a C compiler provided by the Open MPI implementation of MPI.</p></li>
+<li><p>the option <code class="docutils literal notranslate"><span class="pre">-o</span></code> sets the name of the compiled (executable) file.</p></li>
+</ul>
+<p>Let us see what is happening behind the curtains</p>
+<ul class="simple">
+<li><p>you can first try to discover what compiler are you using by executing</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpicc --version
+</pre></div>
+</div>
+<p>that will give you something like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span> <span class="p">(</span><span class="n">Ubuntu</span> <span class="mf">7.4</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="n">ubuntu1</span><span class="o">~</span><span class="mf">18.04</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="mf">7.4</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2017</span> <span class="n">Free</span> <span class="n">Software</span> <span class="n">Foundation</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>or discover what are the library inclusion and linking options by asking for <code class="docutils literal notranslate"><span class="pre">mpicc</span> <span class="pre">--showme:compile</span></code> and <code class="docutils literal notranslate"><span class="pre">mpicc</span> <span class="pre">--showme:link</span></code>, respectively.</p></li>
+<li><p>In general, looking at the output of the <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">mpicc</span></code> command is always a good idea.</p></li>
+</ul>
+<blockquote>
+<div><p>``If you find yourself saying, “But I don’t want to use wrapper compilers!”, please humor us and try them. See if they work for you. Be sure to let us know if they do not work for you. ‘’ - <a class="reference external" href="https://www.open-mpi.org/faq/?category=mpi-apps">https://www.open-mpi.org/faq/?category=mpi-apps</a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A piece of advice: if your program is anything more realistic than a classroom exercise use <code class="docutils literal notranslate"><span class="pre">make</span></code><a class="footnote-reference brackets" href="#id2" id="id1">1</a>, and save yourself from writing painfully long compiling commands, and dealing with complex dependencies more than once.</p>
+</div>
+<blockquote>
+<div><p>“Make gets its knowledge of how to build your program from a file called the makefile, which lists each of the non-source files and how to compute it from other files.”</p>
+</div></blockquote>
+<p>A very simple <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> for our first test would be</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">MPICC</span> <span class="o">=</span> mpicc <span class="c1">#The wrapper for the compiler</span>
+<span class="nv">CFLAGS</span> <span class="o">+=</span> -g  <span class="c1">#Useful for debug symbols</span>
+<span class="nf">all</span><span class="o">:</span> <span class="n">helloworld</span>
+<span class="nf">helloworld</span><span class="o">:</span> <span class="n">helloworld</span>.<span class="n">c</span>
+  <span class="k">$(</span>MPICC<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="nv">$?</span> <span class="k">$(</span>LDLIBS<span class="k">)</span> -o <span class="nv">$@</span>
+<span class="nf">clean</span><span class="o">:</span>
+  rm -f helloworld
+</pre></div>
+</div>
+<p>Let us run our first parallel program by doing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun <span class="o">[</span> -np X <span class="o">]</span> <span class="o">[</span> --hostfile &lt;filename&gt; <span class="o">]</span>  python helloworld.py
+</pre></div>
+</div>
+<p>or by using its synonym</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpiexec <span class="o">[</span> -np X <span class="o">]</span> <span class="o">[</span> --hostfile &lt;filename&gt; <span class="o">]</span> python helloworld.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> will  run  <code class="docutils literal notranslate"><span class="pre">X</span></code> copies of <code class="docutils literal notranslate"><span class="pre">helloworld</span></code> in your current run-time environment, scheduling (by default) in a round-robin fashion by CPU slot.</p></li>
+<li><p>if running under a supported resource manager, Open MPI’s <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> will usually automatically use the corresponding resource manager process starter, as opposed to, for example, rsh or ssh, which require the use of a hostfile, or will default  to  running all <code class="docutils literal notranslate"><span class="pre">X</span></code> copies on the localhost</p></li>
+<li><p>as always, look at the manual, by doing <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">mpirun</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!(</span><span class="nb">cd</span> ccode <span class="o">&amp;&amp;</span> make helloworld<span class="o">)</span>
+<span class="o">!</span>mpiexec -np <span class="m">4</span> ./ccode/helloworld
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib helloworld.c  -o helloworld
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, world!
+Hello, world!
+Hello, world!
+Hello, world!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Every process executes the line that it is a <strong>local</strong> routine!</p>
+<blockquote>
+<div><p>A procedure is <strong>local</strong> if completion
+of the procedure depends only on the local executing process.</p>
+</div></blockquote>
+<blockquote>
+<div><p>A procedure is <strong>non-local</strong> if completion of the operation may require
+the execution of some MPI procedure on another process. Such an
+operation <em>may require communication</em> occurring with another user
+process.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-mpi-parallel-environment">
+<h2>The MPI parallel environment<a class="headerlink" href="#the-mpi-parallel-environment" title="Permalink to this headline">¶</a></h2>
+<p>The MPI parallel environment Let us modify our <code class="docutils literal notranslate"><span class="pre">helloworld</span></code> to
+investigate the MPI parallel environment. Specifically, we want to
+answer, from within the program, to the questions:</p>
+<ol class="simple">
+<li><p>How many processes are there?</p></li>
+<li><p>Who am I?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> ccode/hamlet.c
+<span class="c1">#include &quot;mpi.h&quot;</span>
+<span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span> <span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span> <span class="p">){</span>
+ <span class="nb">int</span> <span class="n">rank</span><span class="p">,</span> <span class="n">size</span><span class="p">;</span>
+ <span class="n">MPI_Init</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span> <span class="p">);</span>
+ <span class="n">MPI_Comm_rank</span><span class="p">(</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rank</span> <span class="p">);</span>
+ <span class="n">MPI_Comm_size</span><span class="p">(</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span> <span class="p">);</span>
+ <span class="n">printf</span><span class="p">(</span> <span class="s2">&quot;Hello world! I&#39;m process </span><span class="si">%d</span><span class="s2"> of </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span> <span class="n">size</span> <span class="p">);</span>
+ <span class="n">MPI_Finalize</span><span class="p">();</span>
+ <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting ccode/hamlet.c
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>How many is answered by a call to <code class="docutils literal notranslate"><span class="pre">MPI_Comm_size</span></code> as an
+<code class="docutils literal notranslate"><span class="pre">int</span></code> value,</p></li>
+<li><p>Who am I? Is answered by a call to <code class="docutils literal notranslate"><span class="pre">MPI_Comm_rank</span></code> as an
+<code class="docutils literal notranslate"><span class="pre">int</span></code> value that is conventionally called <code class="docutils literal notranslate"><span class="pre">rank</span></code> and is a
+number between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">size-1</span></code>.</p></li>
+</ul>
+<p>The MPI parallel environment The last keyword we need to describe is the
+<code class="docutils literal notranslate"><span class="pre">MPI_COMM_WORLD</span></code>, this is the standard Communicator object.</p>
+<blockquote>
+<div><p><strong>Communicator:</strong> A Communicator object connects a group of processes in one
+MPI session. There can be more than one communicator in an MPI session,
+each of them gives each contained process an independent identifier and
+arranges its contained processes in an ordered topology.</p>
+</div></blockquote>
+<p>This provides</p>
+<ul class="simple">
+<li><p>a safe communication space, that guarantees that the code can
+communicate as they need to, without conflicting with communication
+extraneous to the present code, e.g., if other parallel libraries
+are in use,</p></li>
+<li><p>a unified object for conveniently denoting communication context,
+the group of communicating processes and to house abstract process
+naming.</p></li>
+</ul>
+<p>The MPI parallel environment If we have saved our inquiring MPI program
+in the file <code class="docutils literal notranslate"><span class="pre">hamlet.c</span></code>, we can then modify our <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>
+by modifying/adding the lines</p>
+<div class="highlight-Makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">all</span><span class="o">:</span> <span class="n">helloworld</span> <span class="n">hamlet</span>
+<span class="nf">hamlet</span><span class="o">:</span> <span class="n">hamlet</span>.<span class="n">c</span>
+ <span class="k">$(</span>MPICC<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="nv">$?</span> <span class="k">$(</span>LDLIBS<span class="k">)</span> -o <span class="nv">$@</span>
+<span class="nf">clean</span><span class="o">:</span>
+ rm -f helloworld hamlet
+</pre></div>
+</div>
+<p>Then, we compile everything by doing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">hamlet</span></code> (or, simply,
+<code class="docutils literal notranslate"><span class="pre">make</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!(</span><span class="nb">cd</span> ccode <span class="o">&amp;&amp;</span> make hamlet<span class="o">)</span>
+<span class="o">!</span>mpiexec -np <span class="m">6</span> ./ccode/hamlet
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib hamlet.c  -o hamlet
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world! I&#39;m process 0 of 6
+Hello world! I&#39;m process 2 of 6
+Hello world! I&#39;m process 3 of 6
+Hello world! I&#39;m process 4 of 6
+Hello world! I&#39;m process 1 of 6
+Hello world! I&#39;m process 5 of 6
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can rewrite the same code in Python as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> hamlet.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Hello (parallel) world!</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+
+<span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span> 
+<span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span> 
+<span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world! I&#39;m process &quot;</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span><span class="s2">&quot; of &quot;</span><span class="p">,</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting hamlet.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>What have we done here:</p>
+<ul class="simple">
+<li><p>The instruction</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+</pre></div>
+</div>
+<p>provides basic MPI definitions and types, if this was a <code class="docutils literal notranslate"><span class="pre">C</span></code> code, this would have been a <em>preprocessor</em> directive of the form <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;mpi.h&quot;</span></code></p>
+<ul class="simple">
+<li><p>start MPI by creating a communicator</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+</pre></div>
+</div>
+<p>For the Python code</p>
+<ul class="simple">
+<li><p>How many is answered by a call to <code class="docutils literal notranslate"><span class="pre">comm.Get_size()</span></code> as an <code class="docutils literal notranslate"><span class="pre">int</span></code> value,</p></li>
+<li><p>Who am I? Is answered by a call to <code class="docutils literal notranslate"><span class="pre">comm.Get_rank()</span></code> as an <code class="docutils literal notranslate"><span class="pre">int</span></code> value that is conventionally called <strong>rank</strong> and is a number between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">size-1</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mpiexec -n <span class="m">4</span> python hamlet.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world! I&#39;m process  0  of  4
+Hello world! I&#39;m process  1  of  4
+Hello world! I&#39;m process  2  of  4
+Hello world! I&#39;m process  3  of  4
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Every processor answers the call,</p></li>
+<li><p>But it answers it as soon as he has done doing the computation! There is <strong>no synchronization</strong>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="point-to-point-communication">
+<h1>Point-to-point communication<a class="headerlink" href="#point-to-point-communication" title="Permalink to this headline">¶</a></h1>
+<p>Sending and Receiving Messages We have seen that each process within a
+<em>communicator</em> is identified by its <em>rank</em>, how can we [exchange
+data]{.alert} between two processes?</p>
+<p>We need to posses several information to have a meaningful message</p>
+<ul class="simple">
+<li><p>Who is sending the data?</p></li>
+<li><p>To whom the data is sent?</p></li>
+<li><p>What type of data are we sending?</p></li>
+<li><p>How does the receiver can identify it?</p></li>
+</ul>
+<div class="section" id="the-blocking-send-and-receive">
+<h2>The blocking send and receive<a class="headerlink" href="#the-blocking-send-and-receive" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Send</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">message</span><span class="p">,</span> <span class="kt">int</span> <span class="n">count</span><span class="p">,</span> 
+    <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dest</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span> 
+    <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*message</span></code>:   points to the message content itself, it can be a simple scalar or a
+group of data,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">count</span></code>:   specifies the number of data elements of which the message is
+composed,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">datatype</span></code>:   indicates the [data type]{.alert} of the elements that make up the
+message,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">dest</span></code>:   the rank of the destination process,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">tag</span></code>:   the user-defined tag field,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Comm</span> <span class="pre">comm</span></code>:   the communicator in which the source and destination processes
+reside and for which their respective ranks are defined.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Recv</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">message</span><span class="p">,</span> <span class="kt">int</span> <span class="n">count</span><span class="p">,</span> 
+    <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">int</span> <span class="n">source</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span>
+    <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">,</span> <span class="n">MPI_Status</span> <span class="o">*</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*message</span></code>:   points to the message content itself, it can be a simple scalar or a
+group of data,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">count</span></code>:   specifies the number of data elements of which the message is
+composed,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">datatype</span></code>:   indicates the [data type]{.alert} of the elements that make up the
+message,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">dest</span></code>:   the rank of the source process,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">tag</span></code>:   the user-defined tag field,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Comm</span> <span class="pre">comm</span></code>:   the communicator in which the source and destination processes
+reside,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Status</span> <span class="pre">*status</span></code>:   is a structure that contains three fields named <code class="docutils literal notranslate"><span class="pre">MPI_SOURCE</span></code> ,
+<code class="docutils literal notranslate"><span class="pre">MPI_TAG</span></code>, and <code class="docutils literal notranslate"><span class="pre">MPI_ERROR</span></code>.</p></li>
+</ul>
+<p>Basic MPI Data Types Of the inputs in the previous slides the only one
+that is specific to MPI is the <code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span></code>, these corresponds to
+a C data type</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>MPI Data Types</p></th>
+<th class="head"><p>C Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_CHAR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">signed</span> <span class="pre">char</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_SHORT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">signed</span> <span class="pre">short</span> <span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_INT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">signed</span> <span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_LONG</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">signed</span> <span class="pre">long</span> <span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_FLOAT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_DOUBLE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_LONG_DOUBLE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">double</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_UNSIGNED_CHAR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">char</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_UNSIGNED_SHORT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">short</span> <span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_UNSIGNED</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">int</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_UNSIGNED_LONG</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">long</span> <span class="pre">int</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> we will see in the following how to
+<code class="docutils literal notranslate"><span class="pre">send</span></code>/<code class="docutils literal notranslate"><span class="pre">receive</span></code> user–defined data structures.</p>
+<p>Why “blocking” send and receive? For the <code class="docutils literal notranslate"><span class="pre">MPI_Send</span></code> to be
+<strong>blocking</strong> means that it does not return until the message data
+and envelope have been safely stored away so that the sender is free to
+modify the send buffer: it is a <em>non local</em> operation.</p>
+<p><strong>Note:</strong> The message might be copied directly into the
+matching receive buffer (as in the first figure), or it might be copied
+into a temporary system buffer.</p>
+</div>
+<div class="section" id="a-simple-send-receive-example">
+<h2>A simple send/receive example<a class="headerlink" href="#a-simple-send-receive-example" title="Permalink to this headline">¶</a></h2>
+<p>If we want to test these two instructions we can write the following simple C program.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> ccode/easysendrecv.c
+<span class="c1">#include &quot;mpi.h&quot;</span>
+<span class="c1">#include &lt;string.h&gt;</span>
+<span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span> <span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">){</span>
+ <span class="n">char</span> <span class="n">message</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+ <span class="nb">int</span> <span class="n">myrank</span><span class="p">;</span>
+ <span class="n">MPI_Status</span> <span class="n">status</span><span class="p">;</span>
+ <span class="n">MPI_Init</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span> <span class="p">);</span>
+ <span class="n">MPI_Comm_rank</span><span class="p">(</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myrank</span> <span class="p">);</span>
+ <span class="k">if</span> <span class="p">(</span><span class="n">myrank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>  <span class="o">/*</span> <span class="n">code</span> <span class="k">for</span> <span class="n">process</span> <span class="n">zero</span> <span class="o">*/</span>
+  <span class="n">strcpy</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="s2">&quot;Hello, there&quot;</span><span class="p">);</span>
+  <span class="n">MPI_Send</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">MPI_CHAR</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+ <span class="p">}</span>
+ <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">myrank</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span> <span class="o">/*</span> <span class="n">code</span> <span class="k">for</span> <span class="n">process</span> <span class="n">one</span> <span class="o">*/</span>
+  <span class="n">MPI_Recv</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">MPI_CHAR</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;received :</span><span class="si">%s</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+ <span class="p">}</span>
+ <span class="n">MPI_Finalize</span><span class="p">();</span>
+ <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting ccode/easysendrecv.c
+</pre></div>
+</div>
+</div>
+</div>
+<p>That could be recasted in Python by doing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> easysendrecv.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A simple send/receive example</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+
+<span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span> 
+<span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span> 
+<span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span> 
+
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;Hello, there&quot;</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;received :&#39;</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting easysendrecv.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>That we can run as the simpler program by doing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mpiexec -np <span class="m">2</span> python easysendrecv.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>received : Hello, there
+</pre></div>
+</div>
+</div>
+</div>
+<p>for the Python version, or the following for the C version</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!(</span><span class="nb">cd</span> ccode <span class="o">&amp;&amp;</span> make easysendrecv<span class="o">)</span>
+<span class="o">!</span>mpiexec -np <span class="m">2</span> ./ccode/easysendrecv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib easysendrecv.c  -o easysendrecv
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>received :Hello, there:
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, what have we done? Process <span class="math notranslate nohighlight">\(0\)</span> sends the content of the <code class="docutils literal notranslate"><span class="pre">char</span></code>
+array <code class="docutils literal notranslate"><span class="pre">message[20]</span></code>, whose size is <code class="docutils literal notranslate"><span class="pre">strlen(message)+1</span></code> size of
+<code class="docutils literal notranslate"><span class="pre">char</span></code> (<code class="docutils literal notranslate"><span class="pre">MPI_CHAR</span></code>) to processor <code class="docutils literal notranslate"><span class="pre">1</span></code> with tag <code class="docutils literal notranslate"><span class="pre">99</span></code> on
+the communicator <code class="docutils literal notranslate"><span class="pre">MPI_COMM_WORLD</span></code>. on the other side process <span class="math notranslate nohighlight">\(1\)</span>,
+receives into the buffer <code class="docutils literal notranslate"><span class="pre">message[20]</span></code> an array with size <code class="docutils literal notranslate"><span class="pre">20</span></code>
+size of <code class="docutils literal notranslate"><span class="pre">MPI_CHAR</span></code>, from process <code class="docutils literal notranslate"><span class="pre">0</span></code> with tag <code class="docutils literal notranslate"><span class="pre">99</span></code> on the
+same communicator <code class="docutils literal notranslate"><span class="pre">MPI_COMM_WORLD</span></code>.</p>
+<p>Observe that in the Python case we did not declare the size or the type of the object we were passing. The all-lowercase methods (of the <code class="docutils literal notranslate"><span class="pre">Comm</span></code> class), like <code class="docutils literal notranslate"><span class="pre">send()</span></code>, <code class="docutils literal notranslate"><span class="pre">recv()</span></code>, work by passing an object to be sent as a paramenter to the communication call, and the received object is simply the return value. These variants can communicate general Python objects.</p>
+<p>In MPI for Python, the <code class="docutils literal notranslate"><span class="pre">MPI.Comm.Send()</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI.Comm.Recv()</span></code> and methods of communicator objects provide support for blocking point-to-point communications and can be used to communicate memory buffers, as we do in the C variant. Consider the following example sending a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array between two processes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> easysendrecv2.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A (slightly less) simple send/receive example</span>
+<span class="sd">In which we :</span>
+<span class="sd">- pass MPI datatypes explicitly</span>
+<span class="sd">- use the MPI datatype discovery</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">Send</span><span class="p">([</span><span class="n">data</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">INT</span><span class="p">],</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">Recv</span><span class="p">([</span><span class="n">data</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">INT</span><span class="p">],</span> <span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">Send</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">Recv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting easysendrecv2.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>In general, buffer arguments to these calls must be explicitly specified by using a 2/3-list/tuple like <code class="docutils literal notranslate"><span class="pre">[data,</span> <span class="pre">MPI.DOUBLE]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[data,</span> <span class="pre">count,</span> <span class="pre">MPI.DOUBLE]</span></code> (the former one uses the byte-size of data and the extent of the MPI datatype to define count).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mpiexec -np <span class="m">2</span> python easysendrecv2.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>The perform the datatype discovery, Python uses the <code class="docutils literal notranslate"><span class="pre">pickle</span></code> module. This module implements binary protocols for serializing and de-serializing a Python object structure. “Pickling” is the process converting a Python object hierarchy into a byte stream, and “unpickling” is the inverse operation, converting a byte stream (from a binary file or bytes-like object) into an object hierarchy.</p>
+<div class="section" id="a-simple-send-receive-example-programmer-smash">
+<h3>A simple send/receive example : programmer smash!<a class="headerlink" href="#a-simple-send-receive-example-programmer-smash" title="Permalink to this headline">¶</a></h3>
+<p>It is a good exercise
+to try and mess things up, so let us see some damaging suggestions (test them with the previous C code):</p>
+<ul class="simple">
+<li><p>What happens if we have a mismatch in the tags?</p></li>
+<li><p><strong>A:</strong> The process stays there hanging waiting for a message with a tag
+that will never come…</p></li>
+<li><p>What happens if we have a mismatch in the ranks of the sending and
+receiving processes?</p></li>
+<li><p><strong>A:</strong> The process stays there hanging trying to match messages that will
+never come…</p></li>
+<li><p>What happens if we use the wrong message size?</p></li>
+<li><p><strong>A:</strong> If the size of the arriving message is longer than the expected we
+get an error of <code class="docutils literal notranslate"><span class="pre">MPI_ERR_TRUNCATE:</span> <span class="pre">message</span> <span class="pre">truncated</span></code>, note
+that there are combinations of wrong sizes for which things still
+works</p></li>
+<li><p>What happens if we have a mismatch in the type?</p></li>
+<li><p><strong>A:</strong> There are combinations of instances in which things seems to work,
+<strong>but</strong> the code is erroneous, and the behavior is not
+deterministic.</p></li>
+</ul>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://www.gnu.org/software/make/">https://www.gnu.org/software/make/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="parallel-computing.html" title="previous page">Scientific and parallel computing</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
