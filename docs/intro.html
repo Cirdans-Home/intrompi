@@ -56,6 +56,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A First Scientific Computation" href="firstcomputation.html" />
     <link rel="prev" title="Scientific and parallel computing" href="parallel-computing.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -110,6 +111,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="#point-to-point-communication">
    Point-to-point communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="firstcomputation.html">
+   A First Scientific Computation
   </a>
  </li>
 </ul>
@@ -408,7 +414,7 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
-mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib helloworld.c  -o helloworld
+mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib helloworld.c -lm -ldl -o helloworld
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
@@ -512,17 +518,17 @@ by modifying/adding the lines</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
-mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib hamlet.c  -o hamlet
+mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib hamlet.c -lm -ldl -o hamlet
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world! I&#39;m process 0 of 6
-Hello world! I&#39;m process 2 of 6
-Hello world! I&#39;m process 3 of 6
 Hello world! I&#39;m process 1 of 6
+Hello world! I&#39;m process 3 of 6
 Hello world! I&#39;m process 4 of 6
+Hello world! I&#39;m process 2 of 6
 Hello world! I&#39;m process 5 of 6
 </pre></div>
 </div>
@@ -577,9 +583,11 @@ Hello world! I&#39;m process 5 of 6
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world! I&#39;m process  3  of  4
-Hello world! I&#39;m process  2  of  4
-Hello world! I&#39;m process  0  of  4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world! I&#39;m process  2  of  4
+Hello world! I&#39;m process  3  of  4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world! I&#39;m process  0  of  4
 Hello world! I&#39;m process  1  of  4
 </pre></div>
 </div>
@@ -782,7 +790,7 @@ into a temporary system buffer.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
-mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib easysendrecv.c  -o easysendrecv
+mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib easysendrecv.c -lm -ldl -o easysendrecv
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
@@ -1121,7 +1129,7 @@ answer</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
-mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib nonblockingsendrecv.c  -o nonblockingsendrecv
+mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib nonblockingsendrecv.c -lm -ldl -o nonblockingsendrecv
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
@@ -1209,6 +1217,7 @@ absent.</p>
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="parallel-computing.html" title="previous page">Scientific and parallel computing</a>
+    <a class='right-next' id="next-link" href="firstcomputation.html" title="next page">A First Scientific Computation</a>
 
         </div>
         
