@@ -1,3 +1,4 @@
 build-essential
 libopenmpi-dev
-libopenmpi
+libopenmpi2
+openmpi-bin
