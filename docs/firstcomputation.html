@@ -56,6 +56,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Collective Communications" href="collective-communication.html" />
     <link rel="prev" title="Message Passing Interface" href="intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -115,6 +116,16 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    A First Scientific Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="collective-communication.html">
+   Collective Communications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="collective-communication.html#some-computations-using-collective-communications">
+   Some computations using collective communications
   </a>
  </li>
 </ul>
@@ -524,7 +535,7 @@ previous and following process. Thus, no communication at all!</p></li>
 </div>
 </div>
 </div>
-<p>Code that can then be converted into its parallel version by dos</p>
+<p>Code that can then be converted into its (distributed) parallel version as</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> ccode/parallelderiv.c
@@ -635,16 +646,20 @@ previous and following process. Thus, no communication at all!</p></li>
 </div>
 </div>
 </div>
-<p>For which we add again to the Makefile</p>
-<div class="highlight-Makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">parallelderiv</span><span class="o">:</span> <span class="n">parallelderiv</span>.<span class="n">c</span>
+<p>For both the codes we add again to the Makefile</p>
+<div class="highlight-Makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">sequentialderiv</span><span class="o">:</span> <span class="n">sequentialderiv</span>.<span class="n">c</span>
+	<span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="nv">$?</span> <span class="k">$(</span>LDLIBS<span class="k">)</span> -o <span class="nv">$@</span>
+<span class="nf">parallelderiv</span><span class="o">:</span> <span class="n">parallelderiv</span>.<span class="n">c</span>
 	<span class="k">$(</span>MPICC<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="nv">$?</span> <span class="k">$(</span>LDLIBS<span class="k">)</span> -o <span class="nv">$@</span>
 </pre></div>
 </div>
-<p>and compile with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">parallelderiv</span></code> and run as</p>
+<p>and compile with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sequentialderiv</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">parallelderiv</span></code> and run as</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!(</span><span class="nb">cd</span> ccode <span class="o">&amp;&amp;</span> make parallelderiv<span class="o">)</span>
 <span class="o">!</span>mpirun -np <span class="m">4</span> ccode/parallelderiv
+<span class="o">!(</span><span class="nb">cd</span> ccode <span class="o">&amp;&amp;</span> make sequentialderiv<span class="o">)</span>
+<span class="o">!</span>mpirun -np <span class="m">4</span> ccode/sequentialderiv
 </pre></div>
 </div>
 </div>
@@ -660,6 +675,95 @@ mpicc			 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-s
 Node 1 ||f&#39; - fx||_2 = 1.211868e-05
 Node 2 ||f&#39; - fx||_2 = 1.059319e-05
 Node 3 ||f&#39; - fx||_2 = 8.880167e-06
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: ingresso nella directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+/home/cirdan/anaconda3/envs/parallel/bin/x86_64-conda_cos6-linux-gnu-cc -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/cirdan/anaconda3/envs/parallel/include -g			 -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,-rpath,/home/cirdan/anaconda3/envs/parallel/lib -Wl,-rpath-link,/home/cirdan/anaconda3/envs/parallel/lib -L/home/cirdan/anaconda3/envs/parallel/lib sequentialderiv.c -lm -ldl -o sequentialderiv
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>make[1]: uscita dalla directory &quot;/home/cirdan/Documenti/RTDa-PISA/CorsoCalcoloParallelo2021/introtoparallelcomputing/intrompi/ccode&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fx[0] = -0.00 f&#39;[0] = 0.00 |fx - f&#39;| = -2.2e-15
+fx[1] = 0.10 f&#39;[1] = 0.10 |fx - f&#39;| = -5.3e-03
+fx[2] = 0.20 f&#39;[2] = 0.20 |fx - f&#39;| = -1.1e-02
+fx[3] = 0.30 f&#39;[3] = 0.30 |fx - f&#39;| = -1.6e-02
+fx[4] = 0.40 f&#39;[4] = 0.40 |fx - f&#39;| = -2.1e-02
+fx[5] = 0.50 f&#39;[5] = 0.50 |fx - f&#39;| = -2.6e-02
+fx[6] = 0.60 f&#39;[6] = 0.60 |fx - f&#39;| = -3.2e-02
+fx[7] = 0.70 f&#39;[7] = 0.70 |fx - f&#39;| = -3.7e-02
+fx[8] = 0.80 f&#39;[8] = 0.80 |fx - f&#39;| = -4.2e-02
+fx[9] = 0.90 f&#39;[9] = 0.90 |fx - f&#39;| = -4.7e-02
+fx[10] = 1.00 f&#39;[10] = 1.00 |fx - f&#39;| = -5.3e-02
+fx[11] = 1.10 f&#39;[11] = 1.10 |fx - f&#39;| = -5.8e-02
+fx[12] = 1.20 f&#39;[12] = 1.20 |fx - f&#39;| = -6.3e-02
+fx[13] = 1.30 f&#39;[13] = 1.30 |fx - f&#39;| = -6.8e-02
+fx[14] = 1.40 f&#39;[14] = 1.40 |fx - f&#39;| = -7.4e-02
+fx[15] = 1.50 f&#39;[15] = 1.50 |fx - f&#39;| = -7.9e-02
+fx[16] = 1.60 f&#39;[16] = 1.60 |fx - f&#39;| = -8.4e-02
+fx[17] = 1.70 f&#39;[17] = 1.70 |fx - f&#39;| = -8.9e-02
+fx[18] = 1.80 f&#39;[18] = 1.80 |fx - f&#39;| = -9.5e-02
+fx[19] = 1.90 f&#39;[19] = 1.90 |fx - f&#39;| = -1.0e-01
+fx[0] = -0.00 f&#39;[0] = 0.00 |fx - f&#39;| = -2.2e-15
+fx[1] = 0.10 f&#39;[1] = 0.10 |fx - f&#39;| = -5.3e-03
+fx[2] = 0.20 f&#39;[2] = 0.20 |fx - f&#39;| = -1.1e-02
+fx[3] = 0.30 f&#39;[3] = 0.30 |fx - f&#39;| = -1.6e-02
+fx[4] = 0.40 f&#39;[4] = 0.40 |fx - f&#39;| = -2.1e-02
+fx[5] = 0.50 f&#39;[5] = 0.50 |fx - f&#39;| = -2.6e-02
+fx[6] = 0.60 f&#39;[6] = 0.60 |fx - f&#39;| = -3.2e-02
+fx[7] = 0.70 f&#39;[7] = 0.70 |fx - f&#39;| = -3.7e-02
+fx[8] = 0.80 f&#39;[8] = 0.80 |fx - f&#39;| = -4.2e-02
+fx[9] = 0.90 f&#39;[9] = 0.90 |fx - f&#39;| = -4.7e-02
+fx[10] = 1.00 f&#39;[10] = 1.00 |fx - f&#39;| = -5.3e-02
+fx[11] = 1.10 f&#39;[11] = 1.10 |fx - f&#39;| = -5.8e-02
+fx[12] = 1.20 f&#39;[12] = 1.20 |fx - f&#39;| = -6.3e-02
+fx[13] = 1.30 f&#39;[13] = 1.30 |fx - f&#39;| = -6.8e-02
+fx[14] = 1.40 f&#39;[14] = 1.40 |fx - f&#39;| = -7.4e-02
+fx[15] = 1.50 f&#39;[15] = 1.50 |fx - f&#39;| = -7.9e-02
+fx[16] = 1.60 f&#39;[16] = 1.60 |fx - f&#39;| = -8.4e-02
+fx[17] = 1.70 f&#39;[17] = 1.70 |fx - f&#39;| = -8.9e-02
+fx[18] = 1.80 f&#39;[18] = 1.80 |fx - f&#39;| = -9.5e-02
+fx[19] = 1.90 f&#39;[19] = 1.90 |fx - f&#39;| = -1.0e-01
+fx[0] = -0.00 f&#39;[0] = 0.00 |fx - f&#39;| = -2.2e-15
+fx[1] = 0.10 f&#39;[1] = 0.10 |fx - f&#39;| = -5.3e-03
+fx[2] = 0.20 f&#39;[2] = 0.20 |fx - f&#39;| = -1.1e-02
+fx[3] = 0.30 f&#39;[3] = 0.30 |fx - f&#39;| = -1.6e-02
+fx[4] = 0.40 f&#39;[4] = 0.40 |fx - f&#39;| = -2.1e-02
+fx[5] = 0.50 f&#39;[5] = 0.50 |fx - f&#39;| = -2.6e-02
+fx[6] = 0.60 f&#39;[6] = 0.60 |fx - f&#39;| = -3.2e-02
+fx[7] = 0.70 f&#39;[7] = 0.70 |fx - f&#39;| = -3.7e-02
+fx[8] = 0.80 f&#39;[8] = 0.80 |fx - f&#39;| = -4.2e-02
+fx[9] = 0.90 f&#39;[9] = 0.90 |fx - f&#39;| = -4.7e-02
+fx[10] = 1.00 f&#39;[10] = 1.00 |fx - f&#39;| = -5.3e-02
+fx[11] = 1.10 f&#39;[11] = 1.10 |fx - f&#39;| = -5.8e-02
+fx[12] = 1.20 f&#39;[12] = 1.20 |fx - f&#39;| = -6.3e-02
+fx[13] = 1.30 f&#39;[13] = 1.30 |fx - f&#39;| = -6.8e-02
+fx[14] = 1.40 f&#39;[14] = 1.40 |fx - f&#39;| = -7.4e-02
+fx[15] = 1.50 f&#39;[15] = 1.50 |fx - f&#39;| = -7.9e-02
+fx[16] = 1.60 f&#39;[16] = 1.60 |fx - f&#39;| = -8.4e-02
+fx[17] = 1.70 f&#39;[17] = 1.70 |fx - f&#39;| = -8.9e-02
+fx[18] = 1.80 f&#39;[18] = 1.80 |fx - f&#39;| = -9.5e-02
+fx[19] = 1.90 f&#39;[19] = 1.90 |fx - f&#39;| = -1.0e-01
+fx[0] = -0.00 f&#39;[0] = 0.00 |fx - f&#39;| = -2.2e-15
+fx[1] = 0.10 f&#39;[1] = 0.10 |fx - f&#39;| = -5.3e-03
+fx[2] = 0.20 f&#39;[2] = 0.20 |fx - f&#39;| = -1.1e-02
+fx[3] = 0.30 f&#39;[3] = 0.30 |fx - f&#39;| = -1.6e-02
+fx[4] = 0.40 f&#39;[4] = 0.40 |fx - f&#39;| = -2.1e-02
+fx[5] = 0.50 f&#39;[5] = 0.50 |fx - f&#39;| = -2.6e-02
+fx[6] = 0.60 f&#39;[6] = 0.60 |fx - f&#39;| = -3.2e-02
+fx[7] = 0.70 f&#39;[7] = 0.70 |fx - f&#39;| = -3.7e-02
+fx[8] = 0.80 f&#39;[8] = 0.80 |fx - f&#39;| = -4.2e-02
+fx[9] = 0.90 f&#39;[9] = 0.90 |fx - f&#39;| = -4.7e-02
+fx[10] = 1.00 f&#39;[10] = 1.00 |fx - f&#39;| = -5.3e-02
+fx[11] = 1.10 f&#39;[11] = 1.10 |fx - f&#39;| = -5.8e-02
+fx[12] = 1.20 f&#39;[12] = 1.20 |fx - f&#39;| = -6.3e-02
+fx[13] = 1.30 f&#39;[13] = 1.30 |fx - f&#39;| = -6.8e-02
+fx[14] = 1.40 f&#39;[14] = 1.40 |fx - f&#39;| = -7.4e-02
+fx[15] = 1.50 f&#39;[15] = 1.50 |fx - f&#39;| = -7.9e-02
+fx[16] = 1.60 f&#39;[16] = 1.60 |fx - f&#39;| = -8.4e-02
+fx[17] = 1.70 f&#39;[17] = 1.70 |fx - f&#39;| = -8.9e-02
+fx[18] = 1.80 f&#39;[18] = 1.80 |fx - f&#39;| = -9.5e-02
+fx[19] = 1.90 f&#39;[19] = 1.90 |fx - f&#39;| = -1.0e-01
 </pre></div>
 </div>
 </div>
@@ -693,6 +797,7 @@ Node 3 ||f&#39; - fx||_2 = 8.880167e-06
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="intro.html" title="previous page">Message Passing Interface</a>
+    <a class='right-next' id="next-link" href="collective-communication.html" title="next page">Collective Communications</a>
 
         </div>
         

@@ -1,0 +1,862 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collective Communications &#8212; A Short Introduction to Parallel Computing</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="A First Scientific Computation" href="firstcomputation.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">A Short Introduction to Parallel Computing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
+   A Short Introduction to Parallel Computing
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="parallel-computing.html">
+   Scientific and parallel computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parallel-computing.html#parallel-algorithms">
+   Parallel Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Message Passing Interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html#point-to-point-communication">
+   Point-to-point communication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="firstcomputation.html">
+   A First Scientific Computation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Collective Communications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#some-computations-using-collective-communications">
+   Some computations using collective communications
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/collective-communication.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Cirdans-Home/intrompi"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Cirdans-Home/intrompi/issues/new?title=Issue%20on%20page%20%2Fcollective-communication.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/Cirdans-Home/intrompi/edit/main/collective-communication.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Cirdans-Home/intrompi/main?urlpath=lab/tree/collective-communication.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Collective Communications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#broadcast-gather-and-scatter">
+     Broadcast, Gather and Scatter
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#modifying-the-1st-derivative-code">
+       Modifying the 1st derivative code
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#all-to-all-scatter-gather">
+     All-to-All Scatter/Gather
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#global-reduce-operation">
+       Global reduce operation
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-computations-using-collective-communications">
+   Some computations using collective communications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-integrals">
+     Computing Integrals
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-number-generation-montecarlo-type-algorithms">
+     Random number generation: Montecarlo type algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="collective-communications">
+<h1>Collective Communications<a class="headerlink" href="#collective-communications" title="Permalink to this headline">¶</a></h1>
+<p>Collective Communications A <strong>collective communication</strong> is a
+communication that involves a group (or groups) of processes.</p>
+<ul class="simple">
+<li><p>the group of processes is represented as always as a
+<em>communicator</em> that provides a context for the
+operation,</p></li>
+<li><p>Syntax and semantics of the collective operations are consistent
+with the syntax and semantics of the point-to-point operations,</p></li>
+<li><p>For collective operations, the amount of data sent <strong>must exactly
+match</strong> the amount of data specified by the receiver.</p></li>
+</ul>
+<p>Mixing type of calls Collective communication calls may use the
+same communicators as point-to-point communication; Any (conforming)
+implementation of MPI messages guarantees that calls generated on behalf
+of collective communication calls will not be confused with messages
+generated by point-to-point communication.</p>
+<div class="section" id="broadcast-gather-and-scatter">
+<h2>Broadcast, Gather and Scatter<a class="headerlink" href="#broadcast-gather-and-scatter" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>The <strong>broadcast</strong> operation. In the broadcast, initially just the first process contains the data <span class="math notranslate nohighlight">\(a_0\)</span>, but after the broadcast all processes contain it.</p>
+<p><img alt="broadcast" src="_images/broadcast_pattern.png" /></p>
+</li>
+<li><p>This is an example of a <strong>one-to-all</strong> communication, i.e., only one
+process contributes to the result, while all processes receive the
+result.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Bcast</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">count</span><span class="p">,</span> 
+ <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">int</span> <span class="n">root</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Broadcasts a message from the process with rank <code class="docutils literal notranslate"><span class="pre">root</span></code> to all
+processes of the group, itself included.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">void*</span> <span class="pre">buffer</span></code>   on return, the content of root’s buffer is copied to all other
+processes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">count</span></code>   size of the message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">datatype</span></code>   type of the <code class="docutils literal notranslate"><span class="pre">buffer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">root</span></code>   <code class="docutils literal notranslate"><span class="pre">rank</span></code> of the process broadcasting the message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Comm</span> <span class="pre">comm</span></code>   communicator grouping the processes involved in the broadcast
+operation</p></li>
+</ul>
+<p>The <strong>scatter</strong> and <strong>gather</strong> operations</p>
+<ul>
+<li><p>In the <strong>scatter</strong>, initially just the first process contains the
+data <span class="math notranslate nohighlight">\(a_0,\ldots,a_3\)</span>, but after the <strong>scatter</strong> the <span class="math notranslate nohighlight">\(j\)</span>th process
+contains the <span class="math notranslate nohighlight">\(a_j\)</span> data.</p>
+<p><img alt="scatter" src="_images/scatter_pattern.png" /></p>
+</li>
+<li><p>In the <strong>gather</strong>, initially the <span class="math notranslate nohighlight">\(j\)</span>th process contains the <span class="math notranslate nohighlight">\(a_j\)</span>
+data, but after the <strong>gather</strong> the first process contains the data
+<span class="math notranslate nohighlight">\(a_0,\ldots,a_3\)</span></p>
+<p><img alt="gather" src="_images/gather_pattern.png" /></p>
+<p>Each process (root process included) sends the contents of its send
+buffer to the root process. The latter receives the messages and stores
+them in rank order.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Gather</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sendcount</span><span class="p">,</span> 
+  <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span>  <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">recvcount</span><span class="p">,</span> 
+  <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="kt">int</span> <span class="n">root</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">void*</span> <span class="pre">sendbuf</span></code>   starting address of send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">sendcount</span></code>   number of elements in send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">sendtype</span></code>   data type of send buffer elements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void*</span> <span class="pre">recvbuf</span></code>   [address of receive buffer]{.alert}</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">recvcount</span></code>   [number of elements for any single receive]{.alert} (and [not]{.ul}
+the total number of items!)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">recvtype</span></code>   [data type of received buffer elements]{.alert}</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">root</span></code>   rank of receiving process</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Comm</span> <span class="pre">comm</span></code>   communicator</p></li>
+</ul>
+</li>
+</ul>
+<p>Observe that</p>
+<ul class="simple">
+<li><p>The type signature of <code class="docutils literal notranslate"><span class="pre">sendcount</span></code>, <code class="docutils literal notranslate"><span class="pre">sendtype</span></code> on each
+process must be equal to the type signature of <code class="docutils literal notranslate"><span class="pre">recvcount</span></code>,
+<code class="docutils literal notranslate"><span class="pre">recvtype</span></code> at all the processes.</p></li>
+<li><p>The amount of data sent must be equal to the amount of data
+received, pairwise between each process and the root.</p></li>
+</ul>
+<p>Therefore, if we need to have a varying count of data from each
+process, we need to use instead</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Gatherv</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sendcount</span><span class="p">,</span> 
+ <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> 
+ <span class="k">const</span> <span class="kt">int</span> <span class="n">recvcounts</span><span class="p">[],</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">displs</span><span class="p">[],</span> 
+ <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="kt">int</span> <span class="n">root</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">recvcounts[]</span></code>   is an array (of length group size) containing the number of elements
+that are received from each process,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">displs[]</span></code>   is an array (of length group size). Entry <code class="docutils literal notranslate"><span class="pre">i</span></code> specifies the
+displacement relative to <code class="docutils literal notranslate"><span class="pre">recvbuf</span></code> at which to place the
+incoming data from process <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p></li>
+</ul>
+<p>If we need to have the
+result of the <em>gather</em> operation on every process involved in the
+communicator we can use the variant</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Allgather</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sendcount</span><span class="p">,</span>
+ <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">recvcount</span><span class="p">,</span>
+ <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>All processes in the communicator <code class="docutils literal notranslate"><span class="pre">comm</span></code> receive the result. The
+block of data sent from the <span class="math notranslate nohighlight">\(j\)</span>th process is received by every
+process and placed in the <span class="math notranslate nohighlight">\(j\)</span>th block of the buffer <code class="docutils literal notranslate"><span class="pre">recvbuf</span></code>.</p></li>
+<li><p>The type signature associated with <code class="docutils literal notranslate"><span class="pre">sendcount</span></code>, <code class="docutils literal notranslate"><span class="pre">sendtype</span></code>,
+at a process must be equal to the type signature associated with
+<code class="docutils literal notranslate"><span class="pre">recvcount</span></code>, <code class="docutils literal notranslate"><span class="pre">recvtype</span></code> at any other process.</p></li>
+</ul>
+<p>This function has also the version for gathering messages with
+different sizes:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Allgatherv</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sendcount</span><span class="p">,</span>
+ <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">recvcounts</span><span class="p">[],</span>
+ <span class="k">const</span> <span class="kt">int</span> <span class="n">displs</span><span class="p">[],</span> <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and works in a way analogous to the <code class="docutils literal notranslate"><span class="pre">MPI_Gatherv</span></code>.</p>
+<p>The <strong>scatter</strong> is simply the <em>inverse</em> operation of <code class="docutils literal notranslate"><span class="pre">MPI_Gather</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Scatter</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sendcount</span><span class="p">,</span> 
+  <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">recvcount</span><span class="p">,</span> 
+  <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="kt">int</span> <span class="n">root</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">void*</span> <span class="pre">sendbuf</span></code>   [address of send buffer]{.alert}</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">sendcount</span></code>   [number of elements sent to each process]{.alert}</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">sendtype</span></code>   [type of send buffer elements]{.alert}</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void*</span> <span class="pre">recvbuf</span></code>   address of receive buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">recvcount</span></code>   number of elements in receive buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">recvtype</span></code>   data type of receive buffer elements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">root</span></code>   rank of sending process</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Comm</span> <span class="pre">comm</span></code>   communicator</p></li>
+</ul>
+<p>Taxonomy of collective communications: Scatter Observe that</p>
+<ul class="simple">
+<li><p>The type signature of <code class="docutils literal notranslate"><span class="pre">sendcount</span></code>, <code class="docutils literal notranslate"><span class="pre">sendtype</span></code> on each
+process must be equal to the type signature of <code class="docutils literal notranslate"><span class="pre">recvcount</span></code>,
+<code class="docutils literal notranslate"><span class="pre">recvtype</span></code> at the root.</p></li>
+<li><p>The amount of data sent must be equal to the amount of data
+received, pairwise between each process and the root.</p></li>
+</ul>
+<p>Therefore, if we need to have a varying count of data from each
+process, we need to use instead</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Scatterv</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">sendcounts</span><span class="p">[],</span>
+ <span class="k">const</span> <span class="kt">int</span> <span class="n">displs</span><span class="p">[],</span> <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span>
+ <span class="kt">int</span> <span class="n">recvcount</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="kt">int</span> <span class="n">root</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">sendcounts[]</span></code>   is an array (of length group size) containing the number of elements
+that are sent to each process,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">displs[]</span></code>   is an array (of length group size). Entry <code class="docutils literal notranslate"><span class="pre">i</span></code> specifies the
+displacement relative to <code class="docutils literal notranslate"><span class="pre">recvbuf</span></code> from which to take the
+outgoing data to process <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p></li>
+</ul>
+<div class="section" id="modifying-the-1st-derivative-code">
+<h3>Modifying the 1st derivative code<a class="headerlink" href="#modifying-the-1st-derivative-code" title="Permalink to this headline">¶</a></h3>
+<p>Modifying the 1st derivative code Let us perform the following
+modification to our first derivative code:</p>
+<ol class="simple">
+<li><p>Taking from input the number of points to use in each interval,</p></li>
+<li><p>Collecting the whole result on one process and print it on file.</p></li>
+</ol>
+<p>For the first step we use the <code class="docutils literal notranslate"><span class="pre">MPI_Bcast</span></code> function,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+ <span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">){</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+ <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">MPI_Bcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">MPI_INT</span><span class="p">,</span>
+ <span class="mi">0</span><span class="p">,</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>We read on <code class="docutils literal notranslate"><span class="pre">rank</span></code> <span class="math notranslate nohighlight">\(0\)</span> the number <code class="docutils literal notranslate"><span class="pre">n</span></code> from command line,</p></li>
+<li><p>Then we broadcast it with <code class="docutils literal notranslate"><span class="pre">MPI_Bcast</span></code>, pay attention to the fact
+that the broadcast operations happens on all the processes!</p></li>
+</ul>
+<p>Modifying the 1st derivative code Then we <em>gather</em> all the derivatives
+from the various processes and collect them on process <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+ <span class="n">globalderiv</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span> 
+   <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span> 
+   <span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">totalnodes</span><span class="p">));</span>
+
+<span class="n">MPI_Gather</span><span class="p">(</span><span class="n">fx</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">MPI_DOUBLE</span><span class="p">,</span>
+  <span class="n">globalderiv</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">MPI_DOUBLE</span><span class="p">,</span>
+  <span class="mi">0</span><span class="p">,</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>we allocate on <code class="docutils literal notranslate"><span class="pre">rank</span> <span class="pre">0</span></code> the memory that is necessary to store
+the whole derivative array,</p></li>
+<li><p>then we use the to gather all the array <code class="docutils literal notranslate"><span class="pre">fx</span></code> (of <code class="docutils literal notranslate"><span class="pre">double</span></code>)
+inside the <code class="docutils literal notranslate"><span class="pre">globalderiv</span></code> array.</p></li>
+</ul>
+<p>At last we print it out on file on <code class="docutils literal notranslate"><span class="pre">rank</span> <span class="pre">0</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+ <span class="kt">FILE</span> <span class="o">*</span><span class="n">fptr</span><span class="p">;</span> <span class="n">fptr</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&quot;derivative&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">);</span>
+ <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">*</span><span class="n">totalnodes</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="n">fprintf</span><span class="p">(</span><span class="n">fptr</span><span class="p">,</span><span class="s">&quot;%f %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">globala</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">dx</span><span class="p">,</span><span class="n">globalderiv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+ <span class="n">fclose</span><span class="p">(</span><span class="n">fptr</span><span class="p">);</span> <span class="n">free</span><span class="p">(</span><span class="n">globalderiv</span><span class="p">);}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="all-to-all-scatter-gather">
+<h2>All-to-All Scatter/Gather<a class="headerlink" href="#all-to-all-scatter-gather" title="Permalink to this headline">¶</a></h2>
+<p>All-to-All <code class="docutils literal notranslate"><span class="pre">MPI_ALLTOALL</span></code> is an extension of <code class="docutils literal notranslate"><span class="pre">MPI_ALLGATHER</span></code> to
+the case where each process sends distinct data to each of the
+receivers.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Alltoall</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sendcount</span><span class="p">,</span>
+ <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">recvcount</span><span class="p">,</span> 
+ <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <span class="math notranslate nohighlight">\(j\)</span>th block sent from process <span class="math notranslate nohighlight">\(i\)</span> is received by process <span class="math notranslate nohighlight">\(j\)</span> and
+is placed in the <span class="math notranslate nohighlight">\(i\)</span>th block of <code class="docutils literal notranslate"><span class="pre">recvbuf</span></code>.</p></li>
+<li><p>The type signature for <code class="docutils literal notranslate"><span class="pre">sendcount</span></code>, <code class="docutils literal notranslate"><span class="pre">sendtype</span></code>, at a process
+must be equal to the type signature for <code class="docutils literal notranslate"><span class="pre">recvcount</span></code>,
+<code class="docutils literal notranslate"><span class="pre">recvtype</span></code> at any other process.</p></li>
+</ul>
+<p>All-to-All different data size If we need to send data of different size
+between the processes</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">MPI_Alltoallv</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">sendcounts</span><span class="p">[],</span>
+ <span class="k">const</span> <span class="kt">int</span> <span class="n">sdispls</span><span class="p">[],</span> <span class="n">MPI_Datatype</span> <span class="n">sendtype</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span>
+ <span class="k">const</span> <span class="kt">int</span> <span class="n">recvcounts</span><span class="p">[],</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">rdispls</span><span class="p">[],</span>
+ <span class="n">MPI_Datatype</span> <span class="n">recvtype</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">void*</span> <span class="pre">sendbuf</span></code>   starting address of send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">sendcounts[]</span></code>   array specifying the number of elements to send to each rank</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">sdispls[]</span></code>   entry <span class="math notranslate nohighlight">\(j\)</span> specifies the displacement (relative to <code class="docutils literal notranslate"><span class="pre">sendbuf</span></code>)
+from which to take the outgoing data destined for process <span class="math notranslate nohighlight">\(j\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void*</span> <span class="pre">recvbuf</span></code>   array specifying the number of elements that can be received from
+each rank</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">recvcounts[]</span></code>   integer array. Entry <span class="math notranslate nohighlight">\(i\)</span> specifies the displacement (relative to
+<code class="docutils literal notranslate"><span class="pre">recvbuf</span></code>) at which to place the incoming data from process <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">int</span> <span class="pre">rdispls[]</span></code>   entry <span class="math notranslate nohighlight">\(i\)</span> specifies the displacement (relative to <code class="docutils literal notranslate"><span class="pre">recvbuf</span></code>) at
+which to place the incoming data from process <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<div class="section" id="global-reduce-operation">
+<h3>Global reduce operation<a class="headerlink" href="#global-reduce-operation" title="Permalink to this headline">¶</a></h3>
+<p>The reduce operation The reduce operation for a given operator takes a
+data buffer from each of the processes in the communicator group and
+combines it according to operator rules.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">MPI_Reduce</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> 
+ <span class="kt">int</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">MPI_Op</span> <span class="n">op</span><span class="p">,</span> 
+ <span class="kt">int</span> <span class="n">root</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">void*</span> <span class="pre">sendbuf</span></code>   address of send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void*</span> <span class="pre">recvbuf</span></code>   address of receive buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">count</span></code>   number of elements in send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">datatype</span></code>   data type of elements of send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Op</span> <span class="pre">op</span></code>   reduce operation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">root</span></code>   rank of root process</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Comm</span> <span class="pre">comm</span></code>   communicator</p></li>
+</ul>
+<p>The reduce operation The value of <code class="docutils literal notranslate"><span class="pre">MPI_Op</span> <span class="pre">op</span></code> for the reduce
+operation can be taken from any of the following operators.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Constant</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Constant</p></th>
+<th class="head"><p>Operation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_MAX</span></code></p></td>
+<td><p>Maximum</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MPI_MAXLOC</span></code></p></td>
+<td><p>Max value and location</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_MIN</span></code></p></td>
+<td><p>Minimum</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MPI_MINLOC</span></code></p></td>
+<td><p>Minimum value and location</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_SUM</span></code></p></td>
+<td><p>Sum</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MPI_LOR</span></code></p></td>
+<td><p>Logical or</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_PROD</span></code></p></td>
+<td><p>Product</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MPI_BOR</span></code></p></td>
+<td><p>Bit-wise or</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_LAND</span></code></p></td>
+<td><p>Logical and</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MPI_LXOR</span></code></p></td>
+<td><p>Logical exclusive or</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MPI_BAND</span></code></p></td>
+<td><p>Bit-wise and</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MPI_BXOR</span></code></p></td>
+<td><p>Bit-wise exclusive or</p></td>
+</tr>
+</tbody>
+</table>
+<p>Moreover, if a different operator is needed, it is possible to
+create it by means of the function</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Op_create</span><span class="p">(</span><span class="n">MPI_User_function</span><span class="o">*</span> <span class="n">user_fn</span><span class="p">,</span> <span class="kt">int</span> <span class="n">commute</span><span class="p">,</span> 
+<span class="n">MPI_Op</span><span class="o">*</span> <span class="n">op</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C the prototype for a <code class="docutils literal notranslate"><span class="pre">MPI_User_function</span></code> is</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="kt">void</span> <span class="n">MPI_User_function</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">invec</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">inoutvec</span><span class="p">,</span> 
+    <span class="kt">int</span> <span class="o">*</span><span class="n">len</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="o">*</span><span class="n">datatype</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Global reduce operation – All-Reduce As for other collective operations
+we may want to have the result of the reduction available on every
+process in a group.</p>
+<p>The routine for obtaining such result is</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">MPI_Allreduce</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> 
+ <span class="kt">int</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">MPI_Op</span> <span class="n">op</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">void*</span> <span class="pre">sendbuf</span></code>   address of send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">void*</span> <span class="pre">recvbuf</span></code>   address of receive buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">count</span></code>   number of elements in send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Datatype</span> <span class="pre">datatype</span></code>   data type of elements of send buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Op</span> <span class="pre">op</span></code>   reduce operation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MPI_Comm</span> <span class="pre">comm</span></code>   communicator</p></li>
+</ul>
+<p>This instruction behaves like a combination of a <em>reduction</em> and
+<em>broadcast</em> operation.</p>
+<p>Global reduce operation – All-Reduce-Scatter This is another variant of
+the reduction operation in which the result is <em>scattered</em> to all
+processes in a group on return.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">MPI_Reduce_scatter_block</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> 
+ <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">recvcount</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> 
+ <span class="n">MPI_Op</span> <span class="n">op</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The routine is called by all group members using the same arguments
+for <code class="docutils literal notranslate"><span class="pre">recvcount</span></code>, <code class="docutils literal notranslate"><span class="pre">datatype</span></code>, <code class="docutils literal notranslate"><span class="pre">op</span></code> and <code class="docutils literal notranslate"><span class="pre">comm</span></code>.</p></li>
+<li><p>The resulting vector is treated as <code class="docutils literal notranslate"><span class="pre">n</span></code> consecutive blocks of
+<code class="docutils literal notranslate"><span class="pre">recvcount</span></code> elements that are scattered to the processes of the
+group <code class="docutils literal notranslate"><span class="pre">comm</span></code>.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(i\)</span>th block is sent to process <span class="math notranslate nohighlight">\(i\)</span> and stored in the receive
+buffer defined by <code class="docutils literal notranslate"><span class="pre">recvbuf</span></code>, <code class="docutils literal notranslate"><span class="pre">recvcount</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">datatype</span></code>.</p></li>
+</ul>
+<p>Global reduce operation – All-Reduce-Scatter Of this function also a
+variant with variable block–size is available</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">MPI_Reduce_scatter</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">recvcounts</span><span class="p">[],</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">MPI_Op</span> <span class="n">op</span><span class="p">,</span>
+<span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>This routine first performs a global element-wise reduction on
+vectors of <span class="math notranslate nohighlight">\(\verb|count|=\sum_{i=0}^{n-1}\verb|recevcounts[i]|\)</span>
+elements in the send buffers defined by <code class="docutils literal notranslate"><span class="pre">sendbuf</span></code>, <code class="docutils literal notranslate"><span class="pre">count</span></code>
+and <code class="docutils literal notranslate"><span class="pre">datatype</span></code>, using the operation <code class="docutils literal notranslate"><span class="pre">op</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is
+the size of the communicator.</p></li>
+<li><p>The routine is called by all group members using the same arguments
+for <code class="docutils literal notranslate"><span class="pre">recvcounts</span></code>, <code class="docutils literal notranslate"><span class="pre">datatype</span></code>, <code class="docutils literal notranslate"><span class="pre">op</span></code> and <code class="docutils literal notranslate"><span class="pre">comm</span></code>.</p></li>
+<li><p>The resulting vector is treated as <code class="docutils literal notranslate"><span class="pre">n</span></code> consecutive blocks where
+the number of elements of the <span class="math notranslate nohighlight">\(i\)</span>th block is <code class="docutils literal notranslate"><span class="pre">recvcounts[i]</span></code>.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(i\)</span>th block is sent to process <span class="math notranslate nohighlight">\(i\)</span> and stored in the receive
+buffer defined by <code class="docutils literal notranslate"><span class="pre">recvbuf</span></code>, <code class="docutils literal notranslate"><span class="pre">recvcounts[i]</span></code> and
+<code class="docutils literal notranslate"><span class="pre">datatype</span></code>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="some-computations-using-collective-communications">
+<h1>Some computations using collective communications<a class="headerlink" href="#some-computations-using-collective-communications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="computing-integrals">
+<h2>Computing Integrals<a class="headerlink" href="#computing-integrals" title="Permalink to this headline">¶</a></h2>
+<p>For an
+integrable function <span class="math notranslate nohighlight">\(f : [a,b] \rightarrow \mathbb{R}\)</span> the <em>midpoint</em>
+rule (sometimes <em>rectangle</em> rule) is given by
+$<span class="math notranslate nohighlight">\(\int_{a}^{b}f(x) dx \approx I_1 = (b-a) f\left(\frac{a+b}{2}\right),\)</span>$</p>
+<p>0.4 This is a very crude approximation, to make it more accurate we may
+break up the interval <span class="math notranslate nohighlight">\([a,b]\)</span> into a number <span class="math notranslate nohighlight">\(n\)</span> of non-overlapping
+subintervals <span class="math notranslate nohighlight">\([a_k,b_k]\)</span> such that <span class="math notranslate nohighlight">\([a,b] = \cup_k [a_k,b_k]\)</span>,
+$<span class="math notranslate nohighlight">\(I_n =  \sum_{k=0}^n(b_k-a_k) f\left(\frac{a_k+b_k}{2}\right)\)</span>$</p>
+<p>Computing integrals with parallel midpoint quadrature rule If we want to
+transform this computation in a parallel computation we can adopt the
+following sketch:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(mynode</span> <span class="pre">==</span> <span class="pre">0)</span></code> get number of intervals for quadrature</p></li>
+<li><p>broadcast number of intervals to all the processes</p></li>
+<li><p>assign the non-overlapping intervals to the processes</p></li>
+<li><p>sum function values in the center of each interval</p></li>
+<li><p>reduce with operator sum the integral on process 0.</p></li>
+</ol>
+<p>As a test function for the parallel integration routine we can use
+$<span class="math notranslate nohighlight">\(f(x) = \frac{4}{1+x^2}; \qquad I = \int_{0}^{1} \frac{4}{1+x^2} dx = \pi.\)</span>$
+To evaluate the error we can use the value :
+<code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">PI25DT</span> <span class="pre">=</span> <span class="pre">3.141592653589793238462643;</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>   <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">((</span><span class="kt">double</span><span class="p">)</span> <span class="n">n</span><span class="o">*</span><span class="n">totalnodes</span><span class="p">);</span>
+<span class="n">sum</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="n">mynode</span><span class="o">*</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">mynode</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+ <span class="n">x</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">i</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">);</span>
+ <span class="n">sum</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">mypi</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">sum</span><span class="p">;</span>
+<span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mypi</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> 
+    <span class="n">MPI_DOUBLE</span><span class="p">,</span> 
+    <span class="n">MPI_SUM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>We assume that all the intervals have the same size, thus the
+scaling <code class="docutils literal notranslate"><span class="pre">h</span>&#160;&#160; <span class="pre">=</span> <span class="pre">1.0</span> <span class="pre">/</span> <span class="pre">(double)</span> <span class="pre">n</span></code>,</p></li>
+<li><p>We compute all the value <span class="math notranslate nohighlight">\(x\)</span> that are in the local process and
+increment the local sum,</p></li>
+<li><p>in conclusion we perform an <code class="docutils literal notranslate"><span class="pre">MPI_Reduce</span></code> to sum together all the
+local sums.</p></li>
+</ul>
+<p>You can then print out the obtained value of <span class="math notranslate nohighlight">\(\pi\)</span> and the error with
+respect to <code class="docutils literal notranslate"><span class="pre">PI25DT</span></code> as</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+ <span class="n">printf</span><span class="p">(</span><span class="s">&quot;pi is approximately %.16f, Error is %e</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+    <span class="n">pi</span><span class="p">,</span> <span class="n">fabs</span><span class="p">(</span><span class="n">pi</span> <span class="o">-</span> <span class="n">PI25DT</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="random-number-generation-montecarlo-type-algorithms">
+<h2>Random number generation: Montecarlo type algorithms<a class="headerlink" href="#random-number-generation-montecarlo-type-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>Montecarlo methods are algorithms that
+rely on a procedure of repeated random sampling to obtain numerical
+results<a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+<p>0.5 A generic Montecarlo algorithm can be described by the following 4
+steps</p>
+<ol class="simple">
+<li><p>define a domain of possible samples</p></li>
+<li><p>generate the samples from a probability distribution over such
+domain</p></li>
+<li><p>perform a deterministic computation on the inputs</p></li>
+<li><p>aggregate the results</p></li>
+</ol>
+<p>Computing <span class="math notranslate nohighlight">\(\pi\)</span> Montecarlo Style We can write the parallel version of
+such algorithm in the following way</p>
+<ol class="simple">
+<li><p>we divide a square in an number of parts equal to the number of
+processes we have,</p></li>
+<li><p>we generate a number of random points <span class="math notranslate nohighlight">\((x,y)\)</span> in the area owned by
+each process,</p></li>
+<li><p>we compute how many points fall in the circle</p></li>
+<li><p>sum-reduce the number of points in the square and in the circle</p></li>
+<li><p>divide the two numbers on process 0 to get the approximation</p></li>
+</ol>
+<p>Computing <span class="math notranslate nohighlight">\(\pi\)</span> Montecarlo Style We can generate on each node the
+sampling on the reference square by</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>  <span class="o">=</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">totalnodes</span><span class="p">;</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mf">-1.0</span> <span class="o">+</span> <span class="n">mynode</span> <span class="o">*</span> <span class="n">h</span><span class="p">;</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">h</span><span class="p">;</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="mf">-1.0</span><span class="p">;</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">my_SqPoints</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">my_CiPoints</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="n">totalnodes</span><span class="p">){</span>
+ <span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">RAND_MAX</span><span class="p">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">);</span>
+ <span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">RAND_MAX</span><span class="p">;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">);</span>
+ <span class="n">my_SqPoints</span><span class="o">++</span><span class="p">;</span>
+ <span class="k">if</span> <span class="p">(</span> <span class="p">(</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span> <span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="p">)</span> <span class="n">my_CiPoints</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we perform the reduction by doing</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SqPoints</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">CiPoints</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_SqPoints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">SqPoints</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INT</span><span class="p">,</span> <span class="n">MPI_SUM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_CiPoints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CiPoints</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INT</span><span class="p">,</span> <span class="n">MPI_SUM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>and print the approximation</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">CiPoints</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">SqPoints</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Pi is approximately %.16f, Error is %e</span><span class="se">\n</span><span class="s">&quot;</span>
+    <span class="p">,</span><span class="n">pi</span><span class="p">,</span> <span class="n">fabs</span><span class="p">(</span><span class="n">pi</span> <span class="o">-</span> <span class="n">PI25DT</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>For some historical information about this idea:
+<a class="reference external" href="http://shorturl.at/mAWY8">http://shorturl.at/mAWY8</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="firstcomputation.html" title="previous page">A First Scientific Computation</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Fabio Durastante<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
