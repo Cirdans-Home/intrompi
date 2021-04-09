@@ -1,5 +1,6 @@
 MPICC = mpicc			#The wrapper for the compiler
 CFLAGS += -g			#Useful for debug symbols
+LDLIBS=-lm -ldl
 
 all: helloworld hamlet
 
