@@ -273,11 +273,25 @@
     <a class="reference internal nav-link" href="#computing-integrals">
      Computing Integrals
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#python-version">
+       Python version
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#random-number-generation-montecarlo-type-algorithms">
      Random number generation: Montecarlo type algorithms
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Python version
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -686,7 +700,7 @@ buffer defined by <code class="docutils literal notranslate"><span class="pre">r
 integrable function <span class="math notranslate nohighlight">\(f : [a,b] \rightarrow \mathbb{R}\)</span> the <em>midpoint</em>
 rule (sometimes <em>rectangle</em> rule) is given by
 $<span class="math notranslate nohighlight">\(\int_{a}^{b}f(x) dx \approx I_1 = (b-a) f\left(\frac{a+b}{2}\right),\)</span>$</p>
-<p>0.4 This is a very crude approximation, to make it more accurate we may
+<p>This is a very crude approximation, to make it more accurate we may
 break up the interval <span class="math notranslate nohighlight">\([a,b]\)</span> into a number <span class="math notranslate nohighlight">\(n\)</span> of non-overlapping
 subintervals <span class="math notranslate nohighlight">\([a_k,b_k]\)</span> such that <span class="math notranslate nohighlight">\([a,b] = \cup_k [a_k,b_k]\)</span>,
 $<span class="math notranslate nohighlight">\(I_n =  \sum_{k=0}^n(b_k-a_k) f\left(\frac{a_k+b_k}{2}\right)\)</span>$</p>
@@ -735,13 +749,88 @@ respect to <code class="docutils literal notranslate"><span class="pre">PI25DT</
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="section" id="python-version">
+<h3>Python version<a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h3>
+<p>We can implement the same algorithm using MPI4PY.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> quadrature.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Computing pi with parallel quadrature formula</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">mynode</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+<span class="n">totalnodes</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">truepi</span> <span class="o">=</span> <span class="mf">3.141592653589793238462643</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Initialize value of n only if this is rank 0</span>
+<span class="c1"># we are not checking the input, if the user does something that</span>
+<span class="c1"># has no meaning we are going to fail badly!</span>
+<span class="k">if</span> <span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># default value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Broadcast n to all processes</span>
+<span class="n">comm</span><span class="o">.</span><span class="n">Bcast</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Compute local integral</span>
+<span class="n">my_pi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">totalnodes</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">mynode</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">mynode</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">my_pi</span> <span class="o">=</span> <span class="n">my_pi</span> <span class="o">+</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    
+<span class="n">my_pi</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="n">my_pi</span>
+
+<span class="c1"># Send partition back to root process:</span>
+<span class="n">comm</span><span class="o">.</span><span class="n">Reduce</span><span class="p">(</span><span class="n">my_pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">SUM</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+
+<span class="c1"># Only print the result in process 0</span>
+<span class="k">if</span> <span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Integral Sum =&#39;</span><span class="p">,</span> <span class="n">pi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot; The Error is &quot;</span><span class="p">,</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">truepi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting quadrature.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>That we can execute as usual by doing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mpiexec -np <span class="m">4</span> python quadrature.py <span class="m">50</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Integral Sum = 3.141594736923127  The Error is  2.083333333846582e-06
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="random-number-generation-montecarlo-type-algorithms">
 <h2>Random number generation: Montecarlo type algorithms<a class="headerlink" href="#random-number-generation-montecarlo-type-algorithms" title="Permalink to this headline">¶</a></h2>
 <p>Montecarlo methods are algorithms that
 rely on a procedure of repeated random sampling to obtain numerical
-results<a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
-<p>0.5 A generic Montecarlo algorithm can be described by the following 4
+results<a class="footnote-reference brackets" href="#id3" id="id1">1</a>.</p>
+<p>A generic Montecarlo algorithm can be described by the following 4
 steps</p>
 <ol class="simple">
 <li><p>define a domain of possible samples</p></li>
@@ -750,7 +839,7 @@ domain</p></li>
 <li><p>perform a deterministic computation on the inputs</p></li>
 <li><p>aggregate the results</p></li>
 </ol>
-<p>Computing <span class="math notranslate nohighlight">\(\pi\)</span> Montecarlo Style We can write the parallel version of
+<p>We can write the parallel version of
 such algorithm in the following way</p>
 <ol class="simple">
 <li><p>we divide a square in an number of parts equal to the number of
@@ -761,7 +850,7 @@ each process,</p></li>
 <li><p>sum-reduce the number of points in the square and in the circle</p></li>
 <li><p>divide the two numbers on process 0 to get the approximation</p></li>
 </ol>
-<p>Computing <span class="math notranslate nohighlight">\(\pi\)</span> Montecarlo Style We can generate on each node the
+<p>We can generate on each node the
 sampling on the reference square by</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>  <span class="o">=</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">totalnodes</span><span class="p">;</span>
 <span class="n">x1</span> <span class="o">=</span> <span class="mf">-1.0</span> <span class="o">+</span> <span class="n">mynode</span> <span class="o">*</span> <span class="n">h</span><span class="p">;</span>
@@ -796,13 +885,101 @@ sampling on the reference square by</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="section" id="id2">
+<h3>Python version<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Again we can implemente the same procedure in Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%file</span> montecarlo.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Computing pi with parallel quadrature formula</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">mynode</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+<span class="n">totalnodes</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+
+<span class="n">truepi</span> <span class="o">=</span> <span class="mf">3.141592653589793238462643</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Initialize value of n only if this is rank 0</span>
+<span class="c1"># we are not checking the input, if the user does something that</span>
+<span class="c1"># has no meaning we are going to fail badly!</span>
+<span class="k">if</span> <span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># default value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Broadcast n to all processes</span>
+<span class="n">comm</span><span class="o">.</span><span class="n">Bcast</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Compute local quantities</span>
+<span class="n">h</span>  <span class="o">=</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">totalnodes</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">mynode</span> <span class="o">*</span> <span class="n">h</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">h</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">my_SqPoints</span>  <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">my_CiPoints</span>  <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">totalnodes</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span>
+    <span class="n">my_SqPoints</span> <span class="o">=</span> <span class="n">my_SqPoints</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="p">):</span>
+        <span class="n">my_CiPoints</span> <span class="o">=</span> <span class="n">my_CiPoints</span> <span class="o">+</span> <span class="mi">1</span>
+    
+<span class="n">SqPoints</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">CiPoints</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Send back to the root process the data</span>
+<span class="n">comm</span><span class="o">.</span><span class="n">Reduce</span><span class="p">(</span><span class="n">my_SqPoints</span><span class="p">,</span> <span class="n">SqPoints</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">SUM</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<span class="n">comm</span><span class="o">.</span><span class="n">Reduce</span><span class="p">(</span><span class="n">my_CiPoints</span><span class="p">,</span> <span class="n">CiPoints</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">SUM</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+
+<span class="c1"># Only print the result in process 0</span>
+<span class="k">if</span> <span class="n">mynode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="mf">4.0</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">CiPoints</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">SqPoints</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Integral Sum =&#39;</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span><span class="s2">&quot; The Error is &quot;</span><span class="p">,</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pi</span><span class="o">-</span><span class="n">truepi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting montecarlo.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>That we can execute as usual by doing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mpiexec -np <span class="m">4</span> python montecarlo.py <span class="m">1000</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Integral Sum = 3.164  The Error is  0.02240734641020703
+</pre></div>
+</div>
+</div>
+</div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>For some historical information about this idea:
 <a class="reference external" href="http://shorturl.at/mAWY8">http://shorturl.at/mAWY8</a></p>
 </dd>
 </dl>
+</div>
 </div>
 </div>
 
