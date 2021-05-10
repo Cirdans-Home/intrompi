@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{double} \PYG{n}{input}\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{p}{];}
+\PYG{n}{MPI\PYGZus{}Scatter}\PYG{p}{(}\PYG{n}{readdata}\PYG{p}{,}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,}\PYG{n}{input}\PYG{p}{,}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\end{Verbatim}

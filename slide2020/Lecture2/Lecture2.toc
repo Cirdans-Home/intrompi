@@ -1,0 +1,6 @@
+\beamer@sectionintoc {2}{Point-to-Point Communications}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Deadlock}{16}{0}{1}
+\beamer@subsectionintoc {2}{2}{Nonblocking communications}{30}{0}{1}
+\beamer@subsectionintoc {2}{3}{Sendreceive}{37}{0}{1}
+\beamer@subsectionintoc {2}{4}{Things left out}{39}{0}{1}
+\beamer@sectionintoc {3}{A First Scientific Computation}{40}{0}{2}

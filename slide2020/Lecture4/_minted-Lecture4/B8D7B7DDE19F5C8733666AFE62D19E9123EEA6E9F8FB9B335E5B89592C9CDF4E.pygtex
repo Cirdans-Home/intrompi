@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{free}\PYG{p}{(}\PYG{n}{bigarray}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]);}
+\PYG{n}{free}\PYG{p}{(}\PYG{n}{bigarray}\PYG{p}{);}
+\end{Verbatim}

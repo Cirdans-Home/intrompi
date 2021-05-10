@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(}\PYG{n}{message}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}CHAR}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{99}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\end{Verbatim}

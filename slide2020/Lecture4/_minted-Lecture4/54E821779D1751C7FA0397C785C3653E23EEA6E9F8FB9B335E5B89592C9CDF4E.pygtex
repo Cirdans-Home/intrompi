@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{char} \PYG{n}{message}\PYG{p}{[}\PYG{l+m+mi}{20}\PYG{p}{];}
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+\PYG{n}{strcpy}\PYG{p}{(}\PYG{n}{message}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Hello, there\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Send}\PYG{p}{(}\PYG{n}{message}\PYG{p}{,} \PYG{n}{strlen}\PYG{p}{(}\PYG{n}{message}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}CHAR}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{99}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{else} \PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{)\PYGZob{}}
+\PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(}\PYG{n}{message}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}CHAR}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,}
+  \PYG{l+m+mi}{99}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}received :\PYGZpc{}s:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{message}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

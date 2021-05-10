@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{MPI\PYGZus{}Type\PYGZus{}free}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{subarray}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Finalize}\PYG{p}{();}
+\end{Verbatim}

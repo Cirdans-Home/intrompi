@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n+nf}{MPI\PYGZus{}Sendrecv}\PYG{p}{(}\PYG{k}{const} \PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{sendbuf}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{sendcount}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{sendtype}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{dest}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{sendtag}\PYG{p}{,}
+  \PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{recvbuf}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{recvcount}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{recvtype}\PYG{p}{,}
+  \PYG{k+kt}{int} \PYG{n}{source}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{recvtag}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}Status} \PYG{o}{*}\PYG{n}{status}\PYG{p}{);}
+\end{Verbatim}

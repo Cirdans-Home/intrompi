@@ -1,0 +1,9 @@
+\beamer@sectionintoc {2}{Scientific and parallel computing}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Flynn's Taxonomy}{14}{0}{1}
+\beamer@subsectionintoc {2}{2}{The TOP500 List}{23}{0}{1}
+\beamer@sectionintoc {3}{Parallel Algorithms}{25}{0}{2}
+\beamer@sectionintoc {4}{Message Passing Interface}{38}{0}{3}
+\beamer@subsectionintoc {4}{1}{Our First MPI Program}{44}{0}{3}
+\beamer@subsectionintoc {4}{2}{The MPI parallel environment}{56}{0}{3}
+\beamer@subsectionintoc {4}{3}{When to travek the MPI road}{63}{0}{3}
+\beamer@sectionintoc {5}{References}{69}{0}{4}

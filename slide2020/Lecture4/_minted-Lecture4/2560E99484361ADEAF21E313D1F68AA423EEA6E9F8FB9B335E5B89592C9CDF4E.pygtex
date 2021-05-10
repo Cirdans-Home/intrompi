@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Barrier}\PYG{p}{(}\PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{)}
+\end{Verbatim}

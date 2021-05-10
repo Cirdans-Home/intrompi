@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{easysendrecv}\PYG{o}{:} \PYG{n}{easysendrecv}.\PYG{n}{c}
+  \PYG{k}{\PYGZdl{}(}MPICC\PYG{k}{)} \PYG{k}{\PYGZdl{}(}CFLAGS\PYG{k}{)} \PYG{k}{\PYGZdl{}(}LDFLAGS\PYG{k}{)} \PYG{n+nv}{\PYGZdl{}?} \PYG{k}{\PYGZdl{}(}LDLIBS\PYG{k}{)} \PYGZhy{}o \PYG{n+nv}{\PYGZdl{}@}
+\end{Verbatim}

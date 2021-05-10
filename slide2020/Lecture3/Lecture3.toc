@@ -1,0 +1,8 @@
+\beamer@sectionintoc {2}{Collective Communications}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Broadcast, Gather and Scatter}{5}{0}{1}
+\beamer@subsectionintoc {2}{2}{Modifying the 1\textsuperscript {st} derivative code}{18}{0}{1}
+\beamer@subsectionintoc {2}{3}{All-to-All Scatter/Gather}{20}{0}{1}
+\beamer@subsectionintoc {2}{4}{Global reduce operation}{22}{0}{1}
+\beamer@sectionintoc {3}{Some computations using collective communications}{28}{0}{2}
+\beamer@subsectionintoc {3}{1}{Computing Integrals}{28}{0}{2}
+\beamer@subsectionintoc {3}{2}{Random number generation: Montecarlo type algorithms}{31}{0}{2}

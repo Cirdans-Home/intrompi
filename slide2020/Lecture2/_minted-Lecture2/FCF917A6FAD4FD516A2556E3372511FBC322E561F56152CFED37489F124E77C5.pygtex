@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{MPI\PYGZus{}Comm\PYGZus{}rank}\PYG{p}{(}\PYG{n}{comm}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{myrank}\PYG{p}{);}
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+ \PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(}\PYG{n}{recvbuf}\PYG{p}{,} \PYG{n}{count}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{comm}\PYG{p}{,} \PYG{n}{status}\PYG{p}{);}
+ \PYG{n}{MPI\PYGZus{}Send}\PYG{p}{(}\PYG{n}{sendbuf}\PYG{p}{,} \PYG{n}{count}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{comm}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}\PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{)\PYGZob{}}
+ \PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(}\PYG{n}{recvbuf}\PYG{p}{,} \PYG{n}{count}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{comm}\PYG{p}{,} \PYG{n}{status}\PYG{p}{);}
+ \PYG{n}{MPI\PYGZus{}Send}\PYG{p}{(}\PYG{n}{sendbuf}\PYG{p}{,} \PYG{n}{count}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{comm}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

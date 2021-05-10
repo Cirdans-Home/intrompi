@@ -1,0 +1,17 @@
+\frametitle{Writing the parallel algorithm}
+To check if what we have done makes sens we evaluate the error in the $\|\cdot\|_2$ norm on the grid, i.e., $\sqrt{\Delta x} \| \mathbf{f}' - \mathbf{fx}\|_2$ on every process
+\begin{minted}{c}
+error = 0.0;
+for(int i = 0; i < n; i++){
+ error += pow( fx[i]-funprime(a+((b-a)*((double) i))
+ 	/((double) n)),2.0);
+}
+error = sqrt(dx*error);
+printf("Node %d ||f' - fx||_2 = %e\n",mynode,error);
+\end{minted}
+Then we clear the memory and close the parallel environment
+\begin{minted}{c}
+free(f);
+free(fx);
+MPI_Finalize();
+\end{minted}

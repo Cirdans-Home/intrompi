@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}define BUFFSIZE 10000}
+\PYG{k+kt}{int} \PYG{n}{size}\PYG{p}{;} \PYG{k+kt}{char} \PYG{o}{*}\PYG{n}{buff}\PYG{p}{;}
+\PYG{c+c1}{// Buffer of 10000 bytes for MPI\PYGZus{}Bsend}
+\PYG{n}{MPI\PYGZus{}Buffer\PYGZus{}attach}\PYG{p}{(} \PYG{n}{malloc}\PYG{p}{(}\PYG{n}{BUFFSIZE}\PYG{p}{),} \PYG{n}{BUFFSIZE}\PYG{p}{);}
+\PYG{c+c1}{// Buffer size reduced to zero}
+\PYG{n}{MPI\PYGZus{}Buffer\PYGZus{}detach}\PYG{p}{(} \PYG{o}{\PYGZam{}}\PYG{n}{buff}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{size}\PYG{p}{);}
+\PYG{c+c1}{// Buffer of 10000 bytes available again}
+\PYG{n}{MPI\PYGZus{}Buffer\PYGZus{}attach}\PYG{p}{(} \PYG{n}{buff}\PYG{p}{,} \PYG{n}{size}\PYG{p}{);}
+\end{Verbatim}

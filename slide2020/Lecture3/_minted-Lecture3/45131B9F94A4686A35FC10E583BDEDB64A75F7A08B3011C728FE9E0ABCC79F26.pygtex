@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{mynode} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+\PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{4.0} \PYG{o}{*} \PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)}\PYG{n}{CiPoints} \PYG{o}{/} \PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)}\PYG{n}{SqPoints}\PYG{p}{;}
+\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Pi is approximately \PYGZpc{}.16f, Error is \PYGZpc{}e}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+	\PYG{p}{,}\PYG{n}{pi}\PYG{p}{,} \PYG{n}{fabs}\PYG{p}{(}\PYG{n}{pi} \PYG{o}{\PYGZhy{}} \PYG{n}{PI25DT}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

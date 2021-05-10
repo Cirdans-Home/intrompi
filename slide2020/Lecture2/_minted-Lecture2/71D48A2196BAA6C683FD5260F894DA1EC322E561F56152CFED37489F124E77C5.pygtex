@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{strlen}\PYG{p}{(}\PYG{n}{message}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}
+\end{Verbatim}

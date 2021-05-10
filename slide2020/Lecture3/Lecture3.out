@@ -1,0 +1,9 @@
+\BOOKMARK [2][]{Outline0.1}{Outline}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Collective Communications}{}% 2
+\BOOKMARK [3][]{Outline0.2.1.5}{Broadcast, Gather and Scatter}{Outline0.2}% 3
+\BOOKMARK [3][]{Outline0.2.2.18}{Modifying the 1math text inlined[fg]math text inlinedfgmath text inlined[fg]math text inlinedfgst derivative code}{Outline0.2}% 4
+\BOOKMARK [3][]{Outline0.2.3.20}{All-to-All Scatter/Gather}{Outline0.2}% 5
+\BOOKMARK [3][]{Outline0.2.4.22}{Global reduce operation}{Outline0.2}% 6
+\BOOKMARK [2][]{Outline0.3}{Some computations using collective communications}{}% 7
+\BOOKMARK [3][]{Outline0.3.1.28}{Computing Integrals}{Outline0.3}% 8
+\BOOKMARK [3][]{Outline0.3.2.31}{Random number generation: Montecarlo type algorithms}{Outline0.3}% 9

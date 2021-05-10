@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{h}   \PYG{o}{=} \PYG{l+m+mf}{1.0} \PYG{o}{/} \PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{n}\PYG{p}{;}
+\PYG{n}{sum} \PYG{o}{=} \PYG{l+m+mf}{0.0}\PYG{p}{;}
+\PYG{k}{for} \PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{n}{mynode} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+	\PYG{n}{i} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;}
+	\PYG{n}{i} \PYG{o}{+=} \PYG{n}{totalnodes}\PYG{p}{)\PYGZob{}}
+ \PYG{n}{x} \PYG{o}{=} \PYG{n}{h} \PYG{o}{*} \PYG{p}{((}\PYG{k+kt}{double}\PYG{p}{)}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{0.5}\PYG{p}{);}
+ \PYG{n}{sum} \PYG{o}{+=} \PYG{n}{f}\PYG{p}{(}\PYG{n}{x}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{mypi} \PYG{o}{=} \PYG{n}{h} \PYG{o}{*} \PYG{n}{sum}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Reduce}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{mypi}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{pi}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,}
+	\PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,}
+	\PYG{n}{MPI\PYGZus{}SUM}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,}
+	\PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{p}{(}\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{24}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+ \PYG{n}{buffer}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{myvector}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{666}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,}
+   \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\end{Verbatim}

@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Op\PYGZus{}create}\PYG{p}{(}\PYG{n}{MPI\PYGZus{}User\PYGZus{}function}\PYG{o}{*} \PYG{n}{user\PYGZus{}fn}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{commute}\PYG{p}{,}
+\PYG{n}{MPI\PYGZus{}Op}\PYG{o}{*} \PYG{n}{op}\PYG{p}{)}
+\end{Verbatim}

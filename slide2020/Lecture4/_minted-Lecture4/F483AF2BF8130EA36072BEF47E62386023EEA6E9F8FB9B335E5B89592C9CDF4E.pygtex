@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{o}{**}\PYG{n}{bigarray} \PYG{o}{=} \PYG{n}{allocarray}\PYG{p}{(}\PYG{n}{bigsize}\PYG{p}{);}
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{bigsize}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+ \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{bigsize}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+  \PYG{n}{bigarray}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{i}\PYG{o}{*}\PYG{n}{bigsize}\PYG{o}{+}\PYG{n}{j}\PYG{p}{;}
+\PYG{n}{printarr}\PYG{p}{(}\PYG{n}{bigarray}\PYG{p}{,} \PYG{n}{bigsize}\PYG{p}{,} \PYG{l+s}{\PYGZdq{} Sender: Big array \PYGZdq{}}\PYG{p}{);}
+\end{Verbatim}
