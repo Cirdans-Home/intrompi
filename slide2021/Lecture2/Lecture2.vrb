@@ -1,0 +1,19 @@
+\frametitle{Computing $\pi $ Montecarlo Style}
+\small
+Then we perform the reduction by doing
+\begin{minted}{c}
+SqPoints = 0;
+CiPoints = 0;
+MPI_Reduce(&my_SqPoints, &SqPoints, 1, MPI_INT, MPI_SUM, 0,
+ MPI_COMM_WORLD);
+MPI_Reduce(&my_CiPoints, &CiPoints, 1, MPI_INT, MPI_SUM, 0,
+ MPI_COMM_WORLD);
+\end{minted}
+and print the approximation
+\begin{minted}{c}
+if (mynode == 0){
+pi = 4.0 * (double)CiPoints / (double)SqPoints;
+printf("Pi is approximately %.16f, Error is %e\n"
+ ,pi, fabs(pi - PI25DT));
+}
+\end{minted}

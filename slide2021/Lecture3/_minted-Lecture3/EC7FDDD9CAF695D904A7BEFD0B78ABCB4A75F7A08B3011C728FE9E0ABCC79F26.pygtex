@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+ \PYG{k+kt}{FILE} \PYG{o}{*}\PYG{n}{ifp}\PYG{p}{;} \PYG{k+kt}{char} \PYG{n}{line}\PYG{p}{[}\PYG{l+m+mi}{300}\PYG{p}{];}
+ \PYG{k+kt}{int} \PYG{n}{numberoftests}\PYG{p}{,} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+ \PYG{n}{ifp} \PYG{o}{=} \PYG{n}{fopen}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}henonheiles.inp\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{);}
+ \PYG{k}{if} \PYG{p}{(}\PYG{n}{ifp} \PYG{o}{==} \PYG{n+nb}{NULL}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+  \PYG{n}{fprintf}\PYG{p}{(}\PYG{n}{stderr}\PYG{p}{,}
+   \PYG{l+s}{\PYGZdq{}Can\PYGZsq{}t open input file henonheiles.inp!}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+  \PYG{n}{MPI\PYGZus{}Finalize}\PYG{p}{();} \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+ \PYG{p}{\PYGZcb{}}
+ \PYG{n}{fgets}\PYG{p}{(}\PYG{n}{line}\PYG{p}{,} \PYG{l+m+mi}{300}\PYG{p}{,} \PYG{n}{ifp}\PYG{p}{);}
+ \PYG{n}{sscanf}\PYG{p}{(}\PYG{n}{line}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{o}{\PYGZam{}}\PYG{n}{numberoftests}\PYG{p}{);}
+ \PYG{n}{readdata} \PYG{o}{=} \PYG{p}{(}\PYG{k+kt}{double} \PYG{o}{*}\PYG{p}{)}
+   \PYG{n}{malloc}\PYG{p}{(} \PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{7}\PYG{o}{*}\PYG{n}{numberoftests} \PYG{p}{);}
+ \PYG{k}{while}\PYG{p}{(}\PYG{n}{fgets}\PYG{p}{(}\PYG{n}{line}\PYG{p}{,} \PYG{l+m+mi}{300}\PYG{p}{,} \PYG{n}{ifp}\PYG{p}{)}\PYG{o}{!=}\PYG{n+nb}{NULL}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+ \PYG{n}{readdata}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{line}\PYG{p}{);}
+ \PYG{n}{i}\PYG{o}{++}\PYG{p}{;}
+ \PYG{p}{\PYGZcb{}}
+ \PYG{n}{fclose}\PYG{p}{(}\PYG{n}{ifp}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+mpirun \PYGZhy{}np \PYG{l+m}{6} hamlet
+\end{Verbatim}

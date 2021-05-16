@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{h}  \PYG{o}{=} \PYG{l+m+mf}{2.0} \PYG{o}{/} \PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{totalnodes}\PYG{p}{;}
+\PYG{n}{x1} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0} \PYG{o}{+} \PYG{n}{mynode} \PYG{o}{*} \PYG{n}{h}\PYG{p}{;}
+\PYG{n}{x2} \PYG{o}{=} \PYG{n}{x1} \PYG{o}{+} \PYG{n}{h}\PYG{p}{;}
+\PYG{n}{y1} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{;}
+\PYG{n}{y2} \PYG{o}{=} \PYG{l+m+mf}{1.0}\PYG{p}{;}
+\PYG{n}{my\PYGZus{}SqPoints}  \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{my\PYGZus{}CiPoints}  \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{k}{for} \PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}=} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i} \PYG{o}{+=} \PYG{n}{totalnodes}\PYG{p}{)\PYGZob{}}
+ \PYG{n}{x} \PYG{o}{=} \PYG{n}{rand}\PYG{p}{();} \PYG{n}{x} \PYG{o}{=} \PYG{n}{x} \PYG{o}{/} \PYG{n}{RAND\PYGZus{}MAX}\PYG{p}{;} \PYG{n}{x} \PYG{o}{=} \PYG{n}{x1} \PYG{o}{+} \PYG{n}{x} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x2} \PYG{o}{\PYGZhy{}} \PYG{n}{x1}\PYG{p}{);}
+ \PYG{n}{y} \PYG{o}{=} \PYG{n}{rand}\PYG{p}{();} \PYG{n}{y} \PYG{o}{=} \PYG{n}{y} \PYG{o}{/} \PYG{n}{RAND\PYGZus{}MAX}\PYG{p}{;} \PYG{n}{y} \PYG{o}{=} \PYG{n}{y1} \PYG{o}{+} \PYG{n}{y} \PYG{o}{*} \PYG{p}{(}\PYG{n}{y2} \PYG{o}{\PYGZhy{}} \PYG{n}{y1}\PYG{p}{);}
+ \PYG{n}{my\PYGZus{}SqPoints}\PYG{o}{++}\PYG{p}{;}
+ \PYG{k}{if} \PYG{p}{(} \PYG{p}{(} \PYG{n}{x}\PYG{o}{*}\PYG{n}{x} \PYG{o}{+} \PYG{n}{y}\PYG{o}{*}\PYG{n}{y} \PYG{p}{)} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mf}{1.0} \PYG{p}{)} \PYG{n}{my\PYGZus{}CiPoints}\PYG{o}{++}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

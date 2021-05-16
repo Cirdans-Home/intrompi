@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{MPI\PYGZus{}Init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{argc}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{argv}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Type\PYGZus{}create\PYGZus{}subarray}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{array\PYGZus{}size}\PYG{p}{,}
+ \PYG{n}{array\PYGZus{}subsize}\PYG{p}{,} \PYG{n}{array\PYGZus{}start}\PYG{p}{,}
+ \PYG{n}{MPI\PYGZus{}ORDER\PYGZus{}C}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{subarray}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Type\PYGZus{}commit}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{subarray}\PYG{p}{);}
+\end{Verbatim}

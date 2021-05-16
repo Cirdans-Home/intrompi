@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+ \PYG{k+kt}{FILE} \PYG{o}{*}\PYG{n}{ofp}\PYG{p}{;}
+ \PYG{k+kt}{int} \PYG{n}{glob\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+ \PYG{k+kt}{char} \PYG{n}{filename}\PYG{p}{[}\PYG{l+m+mi}{200}\PYG{p}{];}
+ \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{size}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+  \PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}energy\PYGZus{}process\PYGZus{}\PYGZpc{}d.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{i}\PYG{p}{);}
+  \PYG{n}{ofp} \PYG{o}{=} \PYG{n}{fopen}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}w+\PYGZdq{}}\PYG{p}{);}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{intervals\PYGZus{}for\PYGZus{}process}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+   \PYG{n}{fprintf}\PYG{p}{(}\PYG{n}{ofp}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}     \PYGZpc{}le      \PYGZpc{}le}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}
+   \PYG{n}{j} \PYG{o}{*} \PYG{n}{readdata}\PYG{p}{[}\PYG{n}{i}\PYG{o}{*}\PYG{l+m+mi}{7}\PYG{o}{+}\PYG{l+m+mi}{6}\PYG{p}{],}
+   \PYG{n}{every\PYGZus{}delta\PYGZus{}energy}\PYG{p}{[}\PYG{n}{glob\PYGZus{}counter}\PYG{p}{]);}
+   \PYG{n}{glob\PYGZus{}counter}\PYG{o}{++}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{n}{fclose}\PYG{p}{(}\PYG{n}{ofp}\PYG{p}{);}
+ \PYG{p}{\PYGZcb{}}
+ \PYG{n}{free}\PYG{p}{(}\PYG{n}{readdata}\PYG{p}{);} \PYG{n}{free}\PYG{p}{(}\PYG{n}{every\PYGZus{}delta\PYGZus{}energy}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{free}\PYG{p}{(}\PYG{n}{intervals\PYGZus{}for\PYGZus{}process}\PYG{p}{);}
+\end{Verbatim}

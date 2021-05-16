@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+ \PYG{n}{MPI\PYGZus{}Send}\PYG{p}{(...);}
+ \PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(...);}
+\PYG{p}{\PYGZcb{}}\PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{)\PYGZob{}}
+ \PYG{n}{MPI\PYGZus{}Send}\PYG{p}{(...);}
+ \PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(...);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

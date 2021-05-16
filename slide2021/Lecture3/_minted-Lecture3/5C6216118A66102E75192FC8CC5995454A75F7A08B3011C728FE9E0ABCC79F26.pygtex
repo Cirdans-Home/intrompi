@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// Now we are rank 1: we first allocate the array for}
+\PYG{c+c1}{// receiving the message from rank 0 (it has to be a}
+\PYG{c+c1}{// square array of size subsize\PYGZca{}2):}
+\PYG{k+kt}{int} \PYG{o}{**}\PYG{n}{subarray} \PYG{o}{=} \PYG{n}{allocarray}\PYG{p}{();}
+\PYG{c+c1}{// with a double for loop we put to zero the entries of the}
+\PYG{c+c1}{// receiveing array:}
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{subsize}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+ \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{subsize}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+  \PYG{n}{subarray}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{c+c1}{// We receive the data in the subarray we have allocated}
+\PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{();}
+\PYG{c+c1}{// We print what we have received:}
+\PYG{n}{printarr}\PYG{p}{(}\PYG{n}{subarray}\PYG{p}{,} \PYG{n}{subsize}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Receiver: Subarray \PYGZhy{}\PYGZhy{} after receive\PYGZdq{}}\PYG{p}{);}
+\end{Verbatim}

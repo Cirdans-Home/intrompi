@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nv}{MPICC} \PYG{o}{=} mpicc \PYG{c+c1}{\PYGZsh{}The wrapper for the compiler}
+\PYG{n+nv}{CFLAGS} \PYG{o}{+=} \PYGZhy{}g  \PYG{c+c1}{\PYGZsh{}Useful for debug symbols}
+\PYG{n+nf}{all}\PYG{o}{:} \PYG{n}{helloworld}
+\PYG{n+nf}{helloworld}\PYG{o}{:} \PYG{n}{helloworld}.\PYG{n}{c}
+  \PYG{k}{\PYGZdl{}(}MPICC\PYG{k}{)} \PYG{k}{\PYGZdl{}(}CFLAGS\PYG{k}{)} \PYG{k}{\PYGZdl{}(}LDFLAGS\PYG{k}{)} \PYG{n+nv}{\PYGZdl{}?} \PYG{k}{\PYGZdl{}(}LDLIBS\PYG{k}{)} \PYGZhy{}o \PYG{n+nv}{\PYGZdl{}@}
+\PYG{n+nf}{clean}\PYG{o}{:}
+  rm \PYGZhy{}f helloworld
+\end{Verbatim}

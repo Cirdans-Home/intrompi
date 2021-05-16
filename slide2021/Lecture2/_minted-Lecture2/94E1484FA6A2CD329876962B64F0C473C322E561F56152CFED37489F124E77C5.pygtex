@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{mynode} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)}
+ \PYG{n}{globalderiv} \PYG{o}{=} \PYG{p}{(}\PYG{k+kt}{double} \PYG{o}{*}\PYG{p}{)}
+   \PYG{n}{malloc}\PYG{p}{(}\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)}
+   \PYG{o}{*}\PYG{p}{(}\PYG{n}{n}\PYG{o}{*}\PYG{n}{totalnodes}\PYG{p}{));}
+
+\PYG{n}{MPI\PYGZus{}Gather}\PYG{p}{(}\PYG{n}{fx}\PYG{p}{,}\PYG{n}{n}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,}
+  \PYG{n}{globalderiv}\PYG{p}{,}\PYG{n}{n}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,}
+  \PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{mynode} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+ \PYG{k+kt}{FILE} \PYG{o}{*}\PYG{n}{fptr}\PYG{p}{;} \PYG{n}{fptr} \PYG{o}{=} \PYG{n}{fopen}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}derivative\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}w\PYGZdq{}}\PYG{p}{);}
+ \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{o}{*}\PYG{n}{totalnodes}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+  \PYG{n}{fprintf}\PYG{p}{(}\PYG{n}{fptr}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZpc{}f \PYGZpc{}f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{globala}\PYG{o}{+}\PYG{n}{i}\PYG{o}{*}\PYG{n}{dx}\PYG{p}{,}\PYG{n}{globalderiv}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+ \PYG{n}{fclose}\PYG{p}{(}\PYG{n}{fptr}\PYG{p}{);} \PYG{n}{free}\PYG{p}{(}\PYG{n}{globalderiv}\PYG{p}{);\PYGZcb{}}
+\end{Verbatim}

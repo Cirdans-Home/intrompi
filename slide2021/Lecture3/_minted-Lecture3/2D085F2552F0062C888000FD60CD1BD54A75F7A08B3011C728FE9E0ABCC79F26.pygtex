@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+ \PYG{n}{stride} \PYG{o}{=} \PYG{p}{(}\PYG{k+kt}{int} \PYG{o}{*}\PYG{p}{)}
+   \PYG{n}{malloc}\PYG{p}{(}\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{o}{*}\PYG{n}{size}\PYG{p}{);}
+ \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{size}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+  \PYG{n}{grandtotal} \PYG{o}{+=}
+    \PYG{n}{intervals\PYGZus{}for\PYGZus{}process}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}
+ \PYG{k}{if}\PYG{p}{(}\PYG{n}{i}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+  \PYG{n}{stride}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+ \PYG{p}{\PYGZcb{}}\PYG{k}{else}\PYG{p}{\PYGZob{}}
+  \PYG{n}{stride}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{stride}\PYG{p}{[}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}
+   \PYG{o}{+}\PYG{n}{intervals\PYGZus{}for\PYGZus{}process}\PYG{p}{[}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{];}
+ \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{every\PYGZus{}delta\PYGZus{}energy} \PYG{o}{=} \PYG{p}{(}\PYG{k+kt}{double} \PYG{o}{*}\PYG{p}{)}
+ \PYG{n}{malloc}\PYG{p}{(}\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)}\PYG{o}{*}
+  \PYG{p}{(}\PYG{n}{grandtotal}\PYG{o}{+}\PYG{n}{size}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

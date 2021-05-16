@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{globala} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{globalb} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{a} \PYG{o}{=} \PYG{n}{globala} \PYG{o}{+} \PYG{p}{((}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{mynode}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{globalb} \PYG{o}{\PYGZhy{}} \PYG{n}{globala}\PYG{p}{)}
+\PYG{o}{/}\PYG{p}{(} \PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{totalnodes}\PYG{p}{);}
+\PYG{n}{b} \PYG{o}{=} \PYG{n}{globala} \PYG{o}{+} \PYG{p}{((}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{mynode}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{globalb} \PYG{o}{\PYGZhy{}} \PYG{n}{globala}\PYG{p}{)}
+\PYG{o}{/}\PYG{p}{(} \PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{totalnodes}\PYG{p}{);}
+\PYG{n}{f}  \PYG{o}{=} \PYG{p}{(}\PYG{k+kt}{double} \PYG{o}{*}\PYG{p}{)} \PYG{n}{malloc}\PYG{p}{(}\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{n}\PYG{p}{));}
+\PYG{n}{fx} \PYG{o}{=} \PYG{p}{(}\PYG{k+kt}{double} \PYG{o}{*}\PYG{p}{)} \PYG{n}{malloc}\PYG{p}{(}\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{n}\PYG{p}{));}
+\PYG{n}{dx} \PYG{o}{=} \PYG{p}{(}\PYG{n}{b}\PYG{o}{\PYGZhy{}}\PYG{n}{a}\PYG{p}{)}\PYG{o}{/}\PYG{p}{((}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{n}\PYG{p}{);}
+\PYG{k}{for}\PYG{p}{(} \PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+\PYG{n}{f}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{fun}\PYG{p}{(}\PYG{n}{a}\PYG{o}{+}\PYG{p}{((}\PYG{k+kt}{double}\PYG{p}{)} \PYG{n}{i}\PYG{p}{)}\PYG{o}{*}\PYG{n}{dx}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{firstderiv1Dp\PYGZus{}vec}\PYG{p}{(} \PYG{n}{n}\PYG{p}{,} \PYG{n}{dx}\PYG{p}{,} \PYG{n}{f}\PYG{p}{,} \PYG{n}{fx}\PYG{p}{,} \PYG{n}{mynode}\PYG{p}{,} \PYG{n}{totalnodes}\PYG{p}{);}
+\end{Verbatim}

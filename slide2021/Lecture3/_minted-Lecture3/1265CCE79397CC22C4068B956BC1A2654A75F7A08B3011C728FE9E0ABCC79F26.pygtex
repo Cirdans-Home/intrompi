@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{mystring}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Type\PYGZus{}contiguous}\PYG{p}{(}\PYG{l+m+mi}{20}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}CHAR}\PYG{p}{,}
+ \PYG{o}{\PYGZam{}}\PYG{n}{mystring}\PYG{p}{);}
+\end{Verbatim}

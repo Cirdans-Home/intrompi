@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n}{firstderiv1Dp\PYGZus{}vec}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dx}\PYG{p}{,} \PYG{k+kt}{double} \PYG{o}{*}\PYG{n}{f}\PYG{p}{,}
+\PYG{k+kt}{double} \PYG{o}{*}\PYG{n}{fx}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{mynode}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{totalnodes}\PYG{p}{)}
+\end{Verbatim}

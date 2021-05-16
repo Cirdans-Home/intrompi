@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{stride}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{*}\PYG{n}{extent}\PYG{p}{[}\PYG{n}{recevtype}\PYG{p}{]}
+\end{Verbatim}

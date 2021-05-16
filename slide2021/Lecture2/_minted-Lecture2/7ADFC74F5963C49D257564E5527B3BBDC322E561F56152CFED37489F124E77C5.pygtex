@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{SqPoints} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{CiPoints} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Reduce}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{my\PYGZus{}SqPoints}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{SqPoints}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}SUM}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,}
+ \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Reduce}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{my\PYGZus{}CiPoints}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{CiPoints}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}SUM}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,}
+ \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\end{Verbatim}

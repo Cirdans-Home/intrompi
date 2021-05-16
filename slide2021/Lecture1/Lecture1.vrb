@@ -1,0 +1,12 @@
+\frametitle{Send-Receive-Replace}
+A slight variant of the \mintinline{c}{MPI_Sendrecv} operation is represented by the \mintinline{c}{MPI_Sendrecv_replace} operation
+\begin{minted}{c}
+int MPI_Sendrecv_replace(void* buf, int count,
+MPI_Datatype datatype, int dest, int sendtag,
+int source, int recvtag,
+MPI_Comm comm, MPI_Status *status)
+\end{minted}
+as the name suggests, the same buffer is used both for the send and
+for the receive, so that the message sent is replaced by the message received.
+\vfill
+Clearly, if you confront its arguments with the one of the \mintinline{c}{MPI_Sendrecv}, the arguments \mintinline{c}{void *recvbuf, int recvcount} are absent.

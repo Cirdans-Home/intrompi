@@ -1,0 +1,15 @@
+\BOOKMARK [2][]{Outline0.1}{Outline}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Scientific\040and\040parallel\040computing}{}% 2
+\BOOKMARK [3][]{Outline0.2.1.14}{Flynn's\040Taxonomy}{Outline0.2}% 3
+\BOOKMARK [3][]{Outline0.2.2.23}{The\040TOP500\040List}{Outline0.2}% 4
+\BOOKMARK [2][]{Outline0.3}{Parallel\040Algorithms}{}% 5
+\BOOKMARK [2][]{Outline0.4}{Message\040Passing\040Interface}{}% 6
+\BOOKMARK [3][]{Outline0.4.1.44}{Our\040First\040MPI\040Program}{Outline0.4}% 7
+\BOOKMARK [3][]{Outline0.4.2.59}{The\040MPI\040parallel\040environment}{Outline0.4}% 8
+\BOOKMARK [3][]{Outline0.4.3.66}{When\040to\040travek\040the\040MPI\040road}{Outline0.4}% 9
+\BOOKMARK [2][]{Outline0.5}{Point-to-Point\040Communications}{}% 10
+\BOOKMARK [3][]{Outline0.5.1.84}{Deadlock}{Outline0.5}% 11
+\BOOKMARK [3][]{Outline0.5.2.98}{Nonblocking\040communications}{Outline0.5}% 12
+\BOOKMARK [3][]{Outline0.5.3.105}{Sendreceive}{Outline0.5}% 13
+\BOOKMARK [3][]{Outline0.5.4.107}{Things\040left\040out}{Outline0.5}% 14
+\BOOKMARK [2][]{Outline0.6}{References}{}% 15

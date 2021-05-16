@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{argc}\PYG{p}{,} \PYG{k+kt}{char} \PYG{o}{**}\PYG{n}{argv}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+\PYG{k+kt}{int} \PYG{n}{a}\PYG{p}{,} \PYG{n}{b}\PYG{p}{,} \PYG{n}{size}\PYG{p}{,} \PYG{n}{rank}\PYG{p}{,} \PYG{n}{tag} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Status} \PYG{n}{status}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Request} \PYG{n}{send\PYGZus{}request}\PYG{p}{,} \PYG{n}{recv\PYGZus{}request}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{argc}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{argv}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Comm\PYGZus{}size}\PYG{p}{(}\PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{size}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Comm\PYGZus{}rank}\PYG{p}{(}\PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{rank}\PYG{p}{);}
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{rank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+\PYG{n}{a} \PYG{o}{=} \PYG{l+m+mi}{314159}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Isend}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{a}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{send\PYGZus{}request}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Irecv} \PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{b}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{recv\PYGZus{}request}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Wait}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{send\PYGZus{}request}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Wait}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{recv\PYGZus{}request}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\PYG{n}{printf} \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Process \PYGZpc{}d received value \PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{rank}\PYG{p}{,} \PYG{n}{b}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+\PYG{n}{a} \PYG{o}{=} \PYG{l+m+mi}{667}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Isend} \PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{a}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{send\PYGZus{}request}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Irecv} \PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{b}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{tag}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{recv\PYGZus{}request}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Wait}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{send\PYGZus{}request}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Wait}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{recv\PYGZus{}request}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\PYG{n}{printf} \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Process \PYGZpc{}d received value \PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{rank}\PYG{p}{,} \PYG{n}{b}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{MPI\PYGZus{}Finalize}\PYG{p}{();}
+\PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

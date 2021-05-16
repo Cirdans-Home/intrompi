@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+mpiexec \PYG{o}{[} \PYGZhy{}np X \PYG{o}{]} \PYG{o}{[} \PYGZhy{}\PYGZhy{}hostfile \PYGZlt{}filename\PYGZgt{} \PYG{o}{]}  helloworld
+\end{Verbatim}

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n+nf}{MPI\PYGZus{}Isend}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{message}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{count}\PYG{p}{,}
+\PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{datatype}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{dest}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{tag}\PYG{p}{,}
+\PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Request} \PYG{o}{*}\PYG{n}{send\PYGZus{}request}\PYG{p}{);}
+
+\PYG{k+kt}{int} \PYG{n+nf}{MPI\PYGZus{}Irecv}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{message}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{count}\PYG{p}{,}
+\PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{datatype}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{source}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{tag}\PYG{p}{,}
+\PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Request} \PYG{o}{*}\PYG{n}{recv\PYGZus{}request}\PYG{p}{);}
+\end{Verbatim}

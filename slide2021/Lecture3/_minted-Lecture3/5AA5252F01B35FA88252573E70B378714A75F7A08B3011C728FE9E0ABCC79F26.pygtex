@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{o}{**}\PYG{n+nf}{allocarray}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+\PYG{k+kt}{int} \PYG{o}{*}\PYG{n}{rows} \PYG{o}{=} \PYG{n}{malloc}\PYG{p}{(}\PYG{n}{n}\PYG{o}{*}\PYG{n}{n}\PYG{o}{*}\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{));}
+\PYG{k+kt}{int} \PYG{o}{**}\PYG{n}{arr2D} \PYG{o}{=} \PYG{n}{malloc}\PYG{p}{(}\PYG{n}{n}\PYG{o}{*}\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{int} \PYG{o}{*}\PYG{p}{));}
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+  \PYG{n}{arr2D}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{p}{(}\PYG{n}{rows}\PYG{p}{[}\PYG{n}{i}\PYG{o}{*}\PYG{n}{n}\PYG{p}{]);}
+\PYG{k}{return} \PYG{n}{arr2D}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

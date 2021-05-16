@@ -1,0 +1,14 @@
+\beamer@sectionintoc {2}{Scientific and parallel computing}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Flynn's Taxonomy}{14}{0}{1}
+\beamer@subsectionintoc {2}{2}{The TOP500 List}{23}{0}{1}
+\beamer@sectionintoc {3}{Parallel Algorithms}{25}{0}{2}
+\beamer@sectionintoc {4}{Message Passing Interface}{38}{0}{3}
+\beamer@subsectionintoc {4}{1}{Our First MPI Program}{44}{0}{3}
+\beamer@subsectionintoc {4}{2}{The MPI parallel environment}{59}{0}{3}
+\beamer@subsectionintoc {4}{3}{When to travek the MPI road}{66}{0}{3}
+\beamer@sectionintoc {5}{Point-to-Point Communications}{72}{0}{4}
+\beamer@subsectionintoc {5}{1}{Deadlock}{84}{0}{4}
+\beamer@subsectionintoc {5}{2}{Nonblocking communications}{98}{0}{4}
+\beamer@subsectionintoc {5}{3}{Sendreceive}{105}{0}{4}
+\beamer@subsectionintoc {5}{4}{Things left out}{107}{0}{4}
+\beamer@sectionintoc {6}{References}{110}{0}{5}

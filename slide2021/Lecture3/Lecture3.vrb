@@ -1,0 +1,23 @@
+\frametitle{Numerical integration of the H\'enon--Heiles model}
+\small
+The writing is completely mechanical at this point:
+\begin{minted}{c}
+if (myrank == 0){
+ FILE *ofp;
+ int glob_counter = 0;
+ char filename[200];
+ for(int i = 0; i < size;i++){
+  sprintf(filename,"energy_process_%d.dat",i);
+  ofp = fopen(filename,"w+");
+  for(int j=0; j < intervals_for_process[i]; j++){
+   fprintf(ofp, "     %le      %le\n",
+   j * readdata[i*7+6],
+   every_delta_energy[glob_counter]);
+   glob_counter++;
+  }
+  fclose(ofp);
+ }
+ free(readdata); free(every_delta_energy);
+}
+free(intervals_for_process);
+\end{minted}

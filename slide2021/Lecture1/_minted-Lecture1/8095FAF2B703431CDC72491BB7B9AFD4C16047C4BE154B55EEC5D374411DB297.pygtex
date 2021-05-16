@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Buffer\PYGZus{}attach}\PYG{p}{(}\PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{buffer}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{size}\PYG{p}{)}
+\end{Verbatim}
