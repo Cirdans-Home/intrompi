@@ -125,15 +125,13 @@
 \headcommand {\beamer@subsectionentry {0}{5}{4}{107}{Things left out}}
 \headcommand {\slideentry {5}{4}{1}{107/107}{Things left out}{0}}
 \headcommand {\beamer@framepages {107}{107}}
-\headcommand {\slideentry {5}{4}{2}{108/109}{Things left out}{0}}
-\headcommand {\beamer@framepages {108}{109}}
-\headcommand {\beamer@sectionpages {72}{109}}
-\headcommand {\beamer@subsectionpages {107}{109}}
-\headcommand {\sectionentry {6}{References}{110}{References}{0}}
-\headcommand {\slideentry {6}{0}{1}{110/110}{}{0}}
-\headcommand {\beamer@framepages {110}{110}}
-\headcommand {\beamer@partpages {1}{110}}
-\headcommand {\beamer@subsectionpages {110}{110}}
-\headcommand {\beamer@sectionpages {110}{110}}
-\headcommand {\beamer@documentpages {110}}
-\headcommand {\gdef \inserttotalframenumber {49}}
+\headcommand {\beamer@sectionpages {72}{107}}
+\headcommand {\beamer@subsectionpages {107}{107}}
+\headcommand {\sectionentry {6}{References}{108}{References}{0}}
+\headcommand {\slideentry {6}{0}{1}{108/108}{}{0}}
+\headcommand {\beamer@framepages {108}{108}}
+\headcommand {\beamer@partpages {1}{108}}
+\headcommand {\beamer@subsectionpages {108}{108}}
+\headcommand {\beamer@sectionpages {108}{108}}
+\headcommand {\beamer@documentpages {108}}
+\headcommand {\gdef \inserttotalframenumber {48}}

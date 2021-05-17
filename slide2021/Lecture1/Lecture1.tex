@@ -731,7 +731,7 @@ MPI_Comm comm, MPI_Status *status)
 \item[\textcolor{black}{\mintinline{c}{void *message}}] points to the message content itself, it can be a simple scalar or a group of data,
 \item[\textcolor{black}{\mintinline{c}{int count}}] specifies the number of data elements of which the message is composed,
 \item[\textcolor{black}{\mintinline{c}{MPI_Datatype datatype}}] indicates the \alert{data type} of the elements that make up the message,
-\item[\textcolor{black}{\mintinline{c}{int dest}}] the rank of the source process, 
+\item[\textcolor{black}{\mintinline{c}{int source}}] the rank of the source process, 
 \item[\textcolor{black}{\mintinline{c}{int tag}}] the user-defined tag field, 
 \item[\textcolor{black}{\mintinline{c}{MPI_Comm comm}}] the communicator in which the source and destination processes reside,
 \item[\textcolor{black}{\mintinline{c}{MPI_Status *status}}] is a structure that contains three fields named \mintinline{c}{MPI_SOURCE} , \mintinline{c}{MPI_TAG}, and \mintinline{c}{MPI_ERROR}.
@@ -1191,17 +1191,17 @@ You can read about this on the manual:
 
 \end{frame}
 
-\begin{frame}{Further modifications}
-\begin{itemize}
-\item In every case the function \mintinline{c}{void firstderiv1Dp_vec} wants to exchange
-information between two adjacent processes, i.e., every process wants to ``swap'' is halo with its adjacent process. We can rewrite the whole function by using the \mintinline{c}{MPI_Sendrecv_replace} point-to-point communication routine.
-\item We can rewrite the entire program in an ``embarrassing parallel'' way, if every process has access to $f$, and are assuming that all the interval are partitioned the same way, by using the knowledge of our \mintinline{c}{rank} we can compute what are the boundary elements at the previous and following process. Thus, no communication at all!
-\end{itemize}
-\vfill
-\onslide<2>{\begin{center} 
--- Try this at home! (Maybe here, if there is still time\ldots) --
-\end{center}}
-\end{frame}
+%\begin{frame}{Further modifications}
+%\begin{itemize}
+%\item In every case the function \mintinline{c}{void firstderiv1Dp_vec} wants to exchange
+%information between two adjacent processes, i.e., every process wants to ``swap'' is halo with its adjacent process. We can rewrite the whole function by using the \mintinline{c}{MPI_Sendrecv_replace} point-to-point communication routine.
+%\item We can rewrite the entire program in an ``embarrassing parallel'' way, if every process has access to $f$, and are assuming that all the interval are partitioned the same way, by using the knowledge of our \mintinline{c}{rank} we can compute what are the boundary elements at the previous and following process. Thus, no communication at all!
+%\end{itemize}
+%\vfill
+%\onslide<2>{\begin{center} 
+%-- Try this at home! (Maybe here, if there is still time\ldots) --
+%\end{center}}
+%\end{frame}
 
 \section{References}
 
