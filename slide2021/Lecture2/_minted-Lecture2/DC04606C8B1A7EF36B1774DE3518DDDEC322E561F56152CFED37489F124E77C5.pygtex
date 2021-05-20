@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{srand}\PYG{p}{(}\PYG{n}{seed} \PYG{o}{+} \PYG{n}{mynode}\PYG{p}{);}
+\PYG{n}{x} \PYG{o}{=} \PYG{n}{rand\PYGZus{}r}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{seed}\PYG{p}{);} \PYG{n}{x} \PYG{o}{=} \PYG{n}{x} \PYG{o}{/} \PYG{n}{RAND\PYGZus{}MAX}\PYG{p}{;} \PYG{n}{x} \PYG{o}{=} \PYG{n}{x1} \PYG{o}{+} \PYG{n}{x} \PYG{o}{*} \PYG{p}{(}\PYG{n}{x2} \PYG{o}{\PYGZhy{}} \PYG{n}{x1}\PYG{p}{);}
+\PYG{n}{y} \PYG{o}{=} \PYG{n}{rand\PYGZus{}r}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{seed}\PYG{p}{);} \PYG{n}{y} \PYG{o}{=} \PYG{n}{y} \PYG{o}{/} \PYG{n}{RAND\PYGZus{}MAX}\PYG{p}{;} \PYG{n}{y} \PYG{o}{=} \PYG{n}{y1} \PYG{o}{+} \PYG{n}{y} \PYG{o}{*} \PYG{p}{(}\PYG{n}{y2} \PYG{o}{\PYGZhy{}} \PYG{n}{y1}\PYG{p}{);}
+\end{Verbatim}

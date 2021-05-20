@@ -40,10 +40,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title Slide %%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Calcolo Parallelo]{Calcolo Parallelo : Lezione 2}
 \author[F. Durastante]{
-    \href{mailto:f.durastante@na.iac.cnr.it}{Fabio Durastante}
+    \href{mailto:fabio.durastante@nunipi.it}{Fabio Durastante}
 }
-\institute{Consiglio Nazionale delle Ricerche - Istituto per Le Applicazioni del Calcolo ``M. Picone''}
-\date[Gennaio 2020]{Master in Scienze e Tecnologie Spaziali, 2021}
+\institute{Dipartimento di Matematica, Università di Pisa}
+\date[Maggio 2021]{Master in Scienze e Tecnologie Spaziali, 2021}
 
 \beamerdefaultoverlayspecification{}
 
@@ -57,6 +57,64 @@
 \frame{\tableofcontents}
 
 \section{A First Scientific Computation}
+
+\begin{frame}[fragile]{The blocking send and receive}
+\begin{minted}{c}
+int MPI_Send(void *message, int count, 
+MPI_Datatype datatype, int dest, int tag, 
+MPI_Comm comm)
+\end{minted}
+\begin{description}
+	\item[\textcolor{black}{\mintinline{c}{void *message}}] points to the message content itself, it can be a simple scalar or a group of data,
+	\item[\textcolor{black}{\mintinline{c}{int count}}] specifies the number of data elements of which the message is composed,
+	\item[\textcolor{black}{\mintinline{c}{MPI_Datatype datatype}}] indicates the \alert{data type} of the elements that make up the message,
+	\item[\textcolor{black}{\mintinline{c}{int dest}}] the rank of the destination process, 
+	\item[\textcolor{black}{\mintinline{c}{int tag}}] the user-defined tag field, 
+	\item[\textcolor{black}{\mintinline{c}{MPI_Comm comm}}] the communicator in which the source and destination processes reside and for which their respective
+	ranks are defined.
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]{The blocking send and receive}
+\begin{minted}{c}
+int MPI_Recv (void *message, int count, 
+MPI_Datatype datatype, int source, int tag,
+MPI_Comm comm, MPI_Status *status)
+\end{minted}
+\begin{description}
+\item[\textcolor{black}{\mintinline{c}{void *message}}] points to the message content itself, it can be a simple scalar or a group of data,
+\item[\textcolor{black}{\mintinline{c}{int count}}] specifies the number of data elements of which the message is composed,
+\item[\textcolor{black}{\mintinline{c}{MPI_Datatype datatype}}] indicates the \alert{data type} of the elements that make up the message,
+\item[\textcolor{black}{\mintinline{c}{int source}}] the rank of the source process, 
+\item[\textcolor{black}{\mintinline{c}{int tag}}] the user-defined tag field, 
+\item[\textcolor{black}{\mintinline{c}{MPI_Comm comm}}] the communicator in which the source and destination processes reside,
+\item[\textcolor{black}{\mintinline{c}{MPI_Status *status}}] is a structure that contains three fields named \mintinline{c}{MPI_SOURCE} , \mintinline{c}{MPI_TAG}, and \mintinline{c}{MPI_ERROR}.
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]{Basic MPI Data Types}
+Of the inputs in the previous slides the only one that is specific to MPI is the \mintinline{c}{MPI_Datatype}, these corresponds to a C data type
+\begin{center}
+	\begin{tabular}{ll}
+		\toprule
+		\mintinline{c}{MPI_CHAR} & \mintinline{c}{signed char} \\
+		\mintinline{c}{MPI_SHORT} & \mintinline{c}{signed short int} \\
+		\mintinline{c}{MPI_INT} & \mintinline{c}{signed int} \\
+		\mintinline{c}{MPI_LONG} & \mintinline{c}{signed long int} \\
+		\mintinline{c}{MPI_FLOAT} & \mintinline{c}{float} \\
+		\mintinline{c}{MPI_DOUBLE} & \mintinline{c}{double} \\
+		\mintinline{c}{MPI_LONG_DOUBLE} & \mintinline{c}{long double} \\
+		\midrule
+		\mintinline{c}{MPI_UNSIGNED_CHAR} & \mintinline{c}{unsigned char}\\
+		\mintinline{c}{MPI_UNSIGNED_SHORT} & \mintinline{c}{unsigned short int}\\
+		\mintinline{c}{MPI_UNSIGNED} & \mintinline{c}{unsigned int} \\
+		\mintinline{c}{MPI_UNSIGNED_LONG} & \mintinline{c}{unsigned long int} \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\alert{Note}: we will see in the last lecture how to \mintinline{c}{send}/\mintinline{c}{receive} user--defined data structures.
+\end{frame}
 
 \begin{frame}{The 1\textsuperscript{st} derivative of a function with finite differences}
 Given a function $f(x) : [a,b] \rightarrow \mathbb{R}$ we want to approximate $f'(x)$ on a (uniform) grid on the $[a,b]$ interval by using a finite difference scheme in parallel.
@@ -1164,6 +1222,21 @@ We can write the parallel version of such algorithm in the following way
 \end{columns}
 \end{frame}
 
+\begin{frame}[fragile]{A word of caution}
+Generating random numbers in a meaningful way requires some care. This is true in general, but it is true in particular in a parallel environment. On each different process we need to be sure of generating \alert{independent sequences of random numbers}. This can be achieved by using different seeds for the random number generator.
+
+We achieve this by using the \mintinline{c}{#include <time.h>} and \mintinline{c}{#include <rand.h>} libraries
+\begin{minted}{c}
+unsigned int seed = (unsigned) time(NULL);
+\end{minted}
+generates an integer on each process depending on the time of the call, then we build a seed by using \mintinline{c}{srand(seed + mynode)} that guarantees different seeds for the processes and thus independent random numbers:
+\begin{minted}{c}
+srand(seed + mynode);
+x = rand_r(&seed); x = x / RAND_MAX; x = x1 + x * (x2 - x1);
+y = rand_r(&seed); y = y / RAND_MAX; y = y1 + y * (y2 - y1);
+\end{minted}
+\end{frame}
+
 \begin{frame}[fragile]{Computing $\pi$ Montecarlo Style}
 We can generate on each node the sampling on the reference square by
 \begin{minted}{c}
@@ -1176,8 +1249,9 @@ my_SqPoints  = 0;
 my_CiPoints  = 0;
 
 for (i = 1; i <= n; i += totalnodes){
- x = rand(); x = x / RAND_MAX; x = x1 + x * (x2 - x1);
- y = rand(); y = y / RAND_MAX; y = y1 + y * (y2 - y1);
+ srand(seed + mynode);
+ x = rand_r(&seed); x = x / RAND_MAX; x = x1 + x * (x2 - x1);
+ y = rand_r(&seed); y = y / RAND_MAX; y = y1 + y * (y2 - y1);
  my_SqPoints++;
  if ( ( x*x + y*y ) <= 1.0 ) my_CiPoints++;
 }
@@ -1204,5 +1278,73 @@ printf("Pi is approximately %.16f, Error is %e\n"
 }
 \end{minted}
 \end{frame}
-	
+
+\section{Timers and Synchronization}
+
+\begin{frame}[fragile]{Timers and Synchronization}
+\begin{itemize}
+	\item<1-> A timer is specified even though it is not an instruction based on ``message-passing,'': timing parallel programs is important for inquiring on the ``performances'' of your code.
+	\item<2-> the timer returns a floating-point number of seconds, representing elapsed wall-clock time since \emph{some time in the past}:
+	\begin{minted}{c}
+	double MPI_Wtime(void);
+	\end{minted}
+	the \emph{time in the past} is guaranteed not to change during the life of the process.
+	\item<3-> the usual application of a timer is something of the form:
+\begin{minted}{c}
+double starttime, endtime;
+starttime = MPI_Wtime();
+< --- foolish things happen here --- >
+endtime = MPI_Wtime();
+printf("That took %f seconds\n",endtime-starttime);
+\end{minted}
+	\item<4-> There exists a tag \mintinline{c}{MPI_WTIME_IS_GLOBAL} that is 1 if clocks at all processes in \mintinline{c}{MPI_COMM_WORLD} are synchronized, 0 otherwise.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Timers and Synchronization}
+\begin{itemize}
+\item MPI offers a \emph{barrier} function that blocks the caller until all processes in the communicator have called it 
+\mint{c}{int MPI_Barrier(MPI_Comm comm)}
+that is, the call returns at any process only after all members of the communicator have entered the call. 
+\item<2-> It can be used together with the \mintinline{c}{MPI_Wait} function to force a synchronization point in the program.
+\item<3-> It can be used to regulate the access to an external resource (e.g., a file) in such a way that every processor accesses it in an order way: if you are interested in writing file in parallel you can look at Chapter 13 of the MPI guide\footnote<3->{Message Passing Interface Forum. MPI: A Message-Passing Interface Standard, Version 3.1. \url{https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report.pdf}, High Performance Computing Center Stuttgart (HLRS).}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Evaluating performances}
+You can use the \mintinline{c}{MPI_Wtime()} to give a simple \alert{evalaution of the performances} of your program.
+\medskip
+
+Consider, e.g., the two programs for the computation of the $\pi$ constant. You can evaluate the \alert{weak scalability} of your code by looking at the time spent in doing the whole computation for growing size of processor numbers and samples. 
+\medskip
+
+We can compute the \alert{efficiency} of the code by measuring:
+\begin{equation*}
+	E = t(1)/t(N) \in [0,1]
+\end{equation*}
+where
+\begin{itemize}
+	\item $t(1)$ is the amount of time to complete a work unit with 1 processing element,
+	\item $t(N)$ is the amount of time to complete N of the same work units with N processing elements.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Further modifications}
+For the derivative program:
+\begin{itemize}
+\item In every case the function \mintinline{c}{void firstderiv1Dp_vec} wants to exchange
+information between two adjacent processes, i.e., every process wants to ``swap'' is halo with its adjacent process. We can rewrite the whole function by using the \mintinline{c}{MPI_Sendrecv_replace} point-to-point communication routine.
+\item We can rewrite the entire program in an ``embarrassing parallel'' way, if every process has access to $f$, and are assuming that all the interval are partitioned the same way, by using the knowledge of our \mintinline{c}{rank} we can compute what are the boundary elements at the previous and following process. Thus, no communication at all!
+\end{itemize}
+For the $\pi$ programs, 
+\begin{itemize}
+	\item Make a graph of the timings to evaluate the \alert{weak scaling} efficiency.
+\end{itemize}
+\vfill
+\begin{center} 
+-- Try this at home! (Maybe here, if there is still time\ldots) --
+\end{center}
+\end{frame}
+
 \end{document}

@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title Slide %%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Calcolo Parallelo]{Calcolo Parallelo : Lezione 1}
 \author[F. Durastante]{
-    \href{mailto:f.durastante@na.iac.cnr.it}{Fabio Durastante}
+    \href{mailto:fabio.durastante@nunipi.it}{Fabio Durastante}
 }
 \institute{Dipartimento di Matematica, Università di Pisa}
 \date[Maggio 2021]{Master in Scienze e Tecnologie Spaziali, 2021}
@@ -1190,18 +1190,6 @@ You can read about this on the manual:
 
 
 \end{frame}
-
-%\begin{frame}{Further modifications}
-%\begin{itemize}
-%\item In every case the function \mintinline{c}{void firstderiv1Dp_vec} wants to exchange
-%information between two adjacent processes, i.e., every process wants to ``swap'' is halo with its adjacent process. We can rewrite the whole function by using the \mintinline{c}{MPI_Sendrecv_replace} point-to-point communication routine.
-%\item We can rewrite the entire program in an ``embarrassing parallel'' way, if every process has access to $f$, and are assuming that all the interval are partitioned the same way, by using the knowledge of our \mintinline{c}{rank} we can compute what are the boundary elements at the previous and following process. Thus, no communication at all!
-%\end{itemize}
-%\vfill
-%\onslide<2>{\begin{center} 
-%-- Try this at home! (Maybe here, if there is still time\ldots) --
-%\end{center}}
-%\end{frame}
 
 \section{References}
 

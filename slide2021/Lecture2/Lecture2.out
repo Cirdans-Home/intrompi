@@ -1,10 +1,11 @@
 \BOOKMARK [2][]{Outline0.1}{Outline}{}% 1
-\BOOKMARK [2][]{Outline0.2}{A\040First\040Scientific\040Computation}{}% 2
-\BOOKMARK [2][]{Outline0.3}{Collective\040Communications}{}% 3
-\BOOKMARK [3][]{Outline0.3.1.22}{Broadcast,\040Gather\040and\040Scatter}{Outline0.3}% 4
-\BOOKMARK [3][]{Outline0.3.2.35}{Modifying\040the\0401math\040text\040inlined[fg]math\040text\040inlinedfgmath\040text\040inlined[fg]math\040text\040inlinedfgst\040derivative\040code}{Outline0.3}% 5
-\BOOKMARK [3][]{Outline0.3.3.37}{All-to-All\040Scatter/Gather}{Outline0.3}% 6
-\BOOKMARK [3][]{Outline0.3.4.39}{Global\040reduce\040operation}{Outline0.3}% 7
-\BOOKMARK [2][]{Outline0.4}{Some\040computations\040using\040collective\040communications}{}% 8
-\BOOKMARK [3][]{Outline0.4.1.45}{Computing\040Integrals}{Outline0.4}% 9
-\BOOKMARK [3][]{Outline0.4.2.48}{Random\040number\040generation:\040Montecarlo\040type\040algorithms}{Outline0.4}% 10
+\BOOKMARK [2][]{Outline0.2}{A First Scientific Computation}{}% 2
+\BOOKMARK [2][]{Outline0.3}{Collective Communications}{}% 3
+\BOOKMARK [3][]{Outline0.3.1.25}{Broadcast, Gather and Scatter}{Outline0.3}% 4
+\BOOKMARK [3][]{Outline0.3.2.38}{Modifying the 1math text inlined[fg]math text inlinedfgmath text inlined[fg]math text inlinedfgst derivative code}{Outline0.3}% 5
+\BOOKMARK [3][]{Outline0.3.3.40}{All-to-All Scatter/Gather}{Outline0.3}% 6
+\BOOKMARK [3][]{Outline0.3.4.42}{Global reduce operation}{Outline0.3}% 7
+\BOOKMARK [2][]{Outline0.4}{Some computations using collective communications}{}% 8
+\BOOKMARK [3][]{Outline0.4.1.48}{Computing Integrals}{Outline0.4}% 9
+\BOOKMARK [3][]{Outline0.4.2.51}{Random number generation: Montecarlo type algorithms}{Outline0.4}% 10
+\BOOKMARK [2][]{Outline0.5}{Timers and Synchronization}{}% 11

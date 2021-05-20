@@ -1,9 +1,10 @@
 \beamer@sectionintoc {2}{A First Scientific Computation}{3}{0}{1}
-\beamer@sectionintoc {3}{Collective Communications}{20}{0}{2}
-\beamer@subsectionintoc {3}{1}{Broadcast, Gather and Scatter}{22}{0}{2}
-\beamer@subsectionintoc {3}{2}{Modifying the 1\textsuperscript {st} derivative code}{35}{0}{2}
-\beamer@subsectionintoc {3}{3}{All-to-All Scatter/Gather}{37}{0}{2}
-\beamer@subsectionintoc {3}{4}{Global reduce operation}{39}{0}{2}
-\beamer@sectionintoc {4}{Some computations using collective communications}{45}{0}{3}
-\beamer@subsectionintoc {4}{1}{Computing Integrals}{45}{0}{3}
-\beamer@subsectionintoc {4}{2}{Random number generation: Montecarlo type algorithms}{48}{0}{3}
+\beamer@sectionintoc {3}{Collective Communications}{23}{0}{2}
+\beamer@subsectionintoc {3}{1}{Broadcast, Gather and Scatter}{25}{0}{2}
+\beamer@subsectionintoc {3}{2}{Modifying the 1\textsuperscript {st} derivative code}{38}{0}{2}
+\beamer@subsectionintoc {3}{3}{All-to-All Scatter/Gather}{40}{0}{2}
+\beamer@subsectionintoc {3}{4}{Global reduce operation}{42}{0}{2}
+\beamer@sectionintoc {4}{Some computations using collective communications}{48}{0}{3}
+\beamer@subsectionintoc {4}{1}{Computing Integrals}{48}{0}{3}
+\beamer@subsectionintoc {4}{2}{Random number generation: Montecarlo type algorithms}{51}{0}{3}
+\beamer@sectionintoc {5}{Timers and Synchronization}{62}{0}{4}

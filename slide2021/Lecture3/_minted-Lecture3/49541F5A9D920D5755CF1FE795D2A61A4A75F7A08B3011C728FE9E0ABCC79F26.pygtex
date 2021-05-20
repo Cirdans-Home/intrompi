@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{double} \PYG{n+nf}{MPI\PYGZus{}Wtime}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{);}
-\end{Verbatim}

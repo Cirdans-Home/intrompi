@@ -1,19 +1,9 @@
-\frametitle{Computing $\pi $ Montecarlo Style}
-\small
-Then we perform the reduction by doing
-\begin{minted}{c}
-SqPoints = 0;
-CiPoints = 0;
-MPI_Reduce(&my_SqPoints, &SqPoints, 1, MPI_INT, MPI_SUM, 0,
- MPI_COMM_WORLD);
-MPI_Reduce(&my_CiPoints, &CiPoints, 1, MPI_INT, MPI_SUM, 0,
- MPI_COMM_WORLD);
-\end{minted}
-and print the approximation
-\begin{minted}{c}
-if (mynode == 0){
-pi = 4.0 * (double)CiPoints / (double)SqPoints;
-printf("Pi is approximately %.16f, Error is %e\n"
- ,pi, fabs(pi - PI25DT));
-}
-\end{minted}
+\frametitle{Timers and Synchronization}
+\begin{itemize}
+\item MPI offers a \emph{barrier} function that blocks the caller until all processes in the communicator have called it
+\mint{c}{int MPI_Barrier(MPI_Comm comm)}
+that is, the call returns at any process only after all members of the communicator have entered the call.
+\item<2-> It can be used together with the \mintinline{c}{MPI_Wait} function to force a synchronization point in the program.
+\item<3-> It can be used to regulate the access to an external resource (e.g., a file) in such a way that every processor accesses it in an order way: if you are interested in writing file in parallel you can look at Chapter 13 of the MPI guide\footnote<3->{Message Passing Interface Forum. MPI: A Message-Passing Interface Standard, Version 3.1. \url{https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report.pdf}, High Performance Computing Center Stuttgart (HLRS).}
+\end{itemize}
+
