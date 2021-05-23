@@ -86,8 +86,13 @@
 \headcommand {\beamer@framepages {74}{76}}
 \headcommand {\slideentry {4}{0}{2}{77/77}{}{0}}
 \headcommand {\beamer@framepages {77}{77}}
-\headcommand {\beamer@partpages {1}{77}}
-\headcommand {\beamer@subsectionpages {74}{77}}
 \headcommand {\beamer@sectionpages {74}{77}}
-\headcommand {\beamer@documentpages {77}}
-\headcommand {\gdef \inserttotalframenumber {37}}
+\headcommand {\beamer@subsectionpages {74}{77}}
+\headcommand {\sectionentry {5}{Conclusions}{78}{Conclusions}{0}}
+\headcommand {\slideentry {5}{0}{1}{78/78}{}{0}}
+\headcommand {\beamer@framepages {78}{78}}
+\headcommand {\beamer@partpages {1}{78}}
+\headcommand {\beamer@subsectionpages {78}{78}}
+\headcommand {\beamer@sectionpages {78}{78}}
+\headcommand {\beamer@documentpages {78}}
+\headcommand {\gdef \inserttotalframenumber {38}}
