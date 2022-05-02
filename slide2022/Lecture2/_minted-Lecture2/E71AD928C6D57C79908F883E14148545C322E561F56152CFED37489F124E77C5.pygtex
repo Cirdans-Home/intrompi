@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{typedef} \PYG{k+kt}{void} \PYG{n+nf}{MPI\PYGZus{}User\PYGZus{}function}\PYG{p}{(}\PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{invec}\PYG{p}{,} \PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{inoutvec}\PYG{p}{,}
+	\PYG{k+kt}{int} \PYG{o}{*}\PYG{n}{len}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Datatype} \PYG{o}{*}\PYG{n}{datatype}\PYG{p}{);}
+\end{Verbatim}

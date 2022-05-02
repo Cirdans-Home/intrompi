@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/bin/bash}
+\PYG{c+c1}{\PYGZsh{}SBATCH \PYGZhy{}\PYGZhy{}job\PYGZhy{}name=helloworld      \PYGZsh{} Job name (can be called with \PYGZpc{}x)}
+\PYG{c+c1}{\PYGZsh{}SBATCH \PYGZhy{}\PYGZhy{}partition=Prod           \PYGZsh{} Node partition: here only Prod}
+\PYG{c+c1}{\PYGZsh{}SBATCH \PYGZhy{}\PYGZhy{}nodes=1                  \PYGZsh{} Run all processes on a single node}
+\PYG{c+c1}{\PYGZsh{}SBATCH \PYGZhy{}\PYGZhy{}ntasks=6                 \PYGZsh{} Run ntasks processes (\PYGZhy{}np ntasks)}
+\PYG{c+c1}{\PYGZsh{}SBATCH \PYGZhy{}\PYGZhy{}time=00:05:00            \PYGZsh{} Time limit hrs:min:sec}
+\PYG{c+c1}{\PYGZsh{}SBATCH \PYGZhy{}o ./\PYGZpc{}x.\PYGZpc{}j.out             \PYGZsh{} Standard Output (\PYGZpc{}j job number)}
+\PYG{c+c1}{\PYGZsh{}SBATCH \PYGZhy{}e ./\PYGZpc{}x.\PYGZpc{}j.err             \PYGZsh{} Standard Error  (\PYGZpc{}j job number)}
+mpirun helloworld
+\end{Verbatim}

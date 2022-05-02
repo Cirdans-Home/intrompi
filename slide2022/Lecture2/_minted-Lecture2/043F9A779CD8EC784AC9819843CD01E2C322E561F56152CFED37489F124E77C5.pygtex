@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Bcast}\PYG{p}{(}\PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{buffer}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{count}\PYG{p}{,}
+ \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{datatype}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{root}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{)}
+\end{Verbatim}

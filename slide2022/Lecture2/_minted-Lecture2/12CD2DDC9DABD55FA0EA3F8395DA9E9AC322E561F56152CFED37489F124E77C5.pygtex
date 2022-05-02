@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n+nf}{MPI\PYGZus{}Alltoallv}\PYG{p}{(}\PYG{k}{const} \PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{sendbuf}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{sendcounts}\PYG{p}{[],}
+ \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{sdispls}\PYG{p}{[],} \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{sendtype}\PYG{p}{,} \PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{recvbuf}\PYG{p}{,}
+ \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{recvcounts}\PYG{p}{[],} \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{rdispls}\PYG{p}{[],}
+ \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{recvtype}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{);}
+\end{Verbatim}

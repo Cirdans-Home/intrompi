@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{n}{numberofsteps}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+ \PYG{n}{leapfrog}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{omega}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{);}
+ \PYG{n}{energy\PYGZus{}at\PYGZus{}time\PYGZus{}t} \PYG{o}{=} \PYG{n}{compute\PYGZus{}energy}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{omega}\PYG{p}{);}
+ \PYG{n}{delta\PYGZus{}energy}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{energy\PYGZus{}at\PYGZus{}time\PYGZus{}t} \PYG{o}{\PYGZhy{}} \PYG{n}{initialenergy}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

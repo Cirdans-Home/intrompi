@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Allreduce}\PYG{p}{(}\PYG{k}{const} \PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{sendbuf}\PYG{p}{,} \PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{recvbuf}\PYG{p}{,}
+ \PYG{k+kt}{int} \PYG{n}{count}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{datatype}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Op} \PYG{n}{op}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{mynode} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)}
+\end{Verbatim}

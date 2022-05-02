@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{mynode} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+ \PYG{k}{if}\PYG{p}{(}\PYG{n}{argc} \PYG{o}{!=} \PYG{l+m+mi}{2}\PYG{p}{)\PYGZob{}}
+  \PYG{n}{n} \PYG{o}{=} \PYG{l+m+mi}{20}\PYG{p}{;}
+ \PYG{p}{\PYGZcb{}}\PYG{k}{else}\PYG{p}{\PYGZob{}}
+  \PYG{n}{n} \PYG{o}{=} \PYG{n}{atoi}\PYG{p}{(}\PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]);}
+ \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{MPI\PYGZus{}Bcast}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{n}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,}
+ \PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\end{Verbatim}

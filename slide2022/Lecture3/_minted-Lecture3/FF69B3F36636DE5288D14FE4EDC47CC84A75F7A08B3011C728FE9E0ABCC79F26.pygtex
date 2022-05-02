@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+ \PYG{k+kt}{int} \PYG{n}{receivearray}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{];}
+ \PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(}\PYG{n}{receivearray}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}INT}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{123}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}	
+\end{Verbatim}

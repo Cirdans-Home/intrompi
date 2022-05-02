@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{MPI\PYGZus{}Gatherv}\PYG{p}{(}\PYG{n}{delta\PYGZus{}energy}\PYG{p}{,}\PYG{n}{numberofsteps}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,}
+ \PYG{n}{every\PYGZus{}delta\PYGZus{}energy}\PYG{p}{,} \PYG{n}{intervals\PYGZus{}for\PYGZus{}process}\PYG{p}{,}\PYG{n}{stride}\PYG{p}{,}
+ \PYG{n}{MPI\PYGZus{}DOUBLE}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\end{Verbatim}

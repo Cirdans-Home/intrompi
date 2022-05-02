@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}mpi.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}stdio.h\PYGZgt{}}
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{(} \PYG{k+kt}{int} \PYG{n}{argc}\PYG{p}{,} \PYG{k+kt}{char} \PYG{o}{**}\PYG{n}{argv}\PYG{p}{)\PYGZob{}}
+\PYG{k+kt}{char} \PYG{n}{message}\PYG{p}{[}\PYG{l+m+mi}{20}\PYG{p}{];}
+\PYG{k+kt}{int} \PYG{n}{myrank}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Status} \PYG{n}{status}\PYG{p}{;}
+\PYG{n}{MPI\PYGZus{}Init}\PYG{p}{(} \PYG{o}{\PYGZam{}}\PYG{n}{argc}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{argv} \PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Comm\PYGZus{}rank}\PYG{p}{(} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{myrank} \PYG{p}{);}
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}  \PYG{c+cm}{/* code for process zero */}
+\PYG{n}{strcpy}\PYG{p}{(}\PYG{n}{message}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Hello, there\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Send}\PYG{p}{(}\PYG{n}{message}\PYG{p}{,} \PYG{n}{strlen}\PYG{p}{(}\PYG{n}{message}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}CHAR}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{99}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{else} \PYG{k}{if} \PYG{p}{(}\PYG{n}{myrank} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{)\PYGZob{}} \PYG{c+cm}{/* code for process one */}
+\PYG{n}{MPI\PYGZus{}Recv}\PYG{p}{(}\PYG{n}{message}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}CHAR}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{99}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}COMM\PYGZus{}WORLD}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{status}\PYG{p}{);}
+\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}received :\PYGZpc{}s:}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{message}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{MPI\PYGZus{}Finalize}\PYG{p}{();}
+\PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

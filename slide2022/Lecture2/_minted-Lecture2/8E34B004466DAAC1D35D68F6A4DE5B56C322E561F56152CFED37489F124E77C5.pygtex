@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{double} \PYG{n}{starttime}\PYG{p}{,} \PYG{n}{endtime}\PYG{p}{;}
+\PYG{n}{starttime} \PYG{o}{=} \PYG{n}{MPI\PYGZus{}Wtime}\PYG{p}{();}
+\PYG{o}{\PYGZlt{}} \PYG{o}{\PYGZhy{}\PYGZhy{}\PYGZhy{}} \PYG{n}{foolish} \PYG{n}{things} \PYG{n}{happen} \PYG{n}{here} \PYG{o}{\PYGZhy{}\PYGZhy{}\PYGZhy{}} \PYG{o}{\PYGZgt{}}
+\PYG{n}{endtime} \PYG{o}{=} \PYG{n}{MPI\PYGZus{}Wtime}\PYG{p}{();}
+\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}That took \PYGZpc{}f seconds}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{endtime}\PYG{o}{\PYGZhy{}}\PYG{n}{starttime}\PYG{p}{);}
+\end{Verbatim}

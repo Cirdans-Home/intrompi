@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Type\PYGZus{}create\PYGZus{}subarray}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{ndims}\PYG{p}{,}
+ \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{array\PYGZus{}of\PYGZus{}sizes}\PYG{p}{[],}
+ \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{array\PYGZus{}of\PYGZus{}subsizes}\PYG{p}{[],}
+ \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{array\PYGZus{}of\PYGZus{}starts}\PYG{p}{[],}
+ \PYG{k+kt}{int} \PYG{n}{order}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{oldtype}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Datatype} \PYG{o}{*}\PYG{n}{newtype}\PYG{p}{)}
+\end{Verbatim}

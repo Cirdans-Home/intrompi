@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{free}\PYG{p}{(}\PYG{n}{f}\PYG{p}{);}
+\PYG{n}{free}\PYG{p}{(}\PYG{n}{fx}\PYG{p}{);}
+\PYG{n}{MPI\PYGZus{}Finalize}\PYG{p}{();}
+\end{Verbatim}

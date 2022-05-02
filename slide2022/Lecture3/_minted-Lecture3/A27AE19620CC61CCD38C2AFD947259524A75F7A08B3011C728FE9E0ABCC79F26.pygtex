@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{mysubarray}\PYG{p}{;}
+\PYG{c+c1}{// We choose the coordinate from which we start the communication:}
+\PYG{k+kt}{int} \PYG{n}{starts}\PYG{p}{[} \PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{};}
+\PYG{k+kt}{int} \PYG{n}{subsizes}\PYG{p}{[} \PYG{p}{]}  \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{};} \PYG{c+c1}{// The size of the square subarray to}
+                       \PYG{c+c1}{// communicate}
+\PYG{k+kt}{int} \PYG{n}{bigsizes}\PYG{p}{[} \PYG{p}{]}  \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{};} \PYG{c+c1}{// The size of the big square array}
+\PYG{n}{MPI\PYGZus{}Type\PYGZus{}create\PYGZus{}subarray}\PYG{p}{();} \PYG{c+c1}{// We create the subarray type}
+\PYG{n}{MPI\PYGZus{}Type\PYGZus{}commit}\PYG{p}{();} \PYG{c+c1}{// We commit it}
+\PYG{n}{MPI\PYGZus{}Send}\PYG{p}{();} \PYG{c+c1}{// We send the subarray to process 1}
+\PYG{n}{MPI\PYGZus{}Type\PYGZus{}free}\PYG{p}{();} \PYG{c+c1}{// We deallocate the type}
+\end{Verbatim}

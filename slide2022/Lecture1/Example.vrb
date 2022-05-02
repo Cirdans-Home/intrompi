@@ -1,0 +1,32 @@
+\frametitle{The MPI parallel environment}
+If we have saved our inquiring MPI program in the file \mintinline{bash}{hamlet.c}, we can then modify our \mintinline{bash}{Makefile} by modifying/adding the lines
+\begin{minted}{Makefile}
+all: helloworld hamlet
+hamlet: hamlet.c
+ $(MPICC) $(CFLAGS) $(LDFLAGS) $? $(LDLIBS) -o $@
+clean:
+ rm -f helloworld hamlet
+\end{minted}
+Then, we compile everything by doing \mintinline{bash}{make hamlet} (or, simply, \mintinline{bash}{make}).
+
+\begin{onlyenv}<2->
+When we run the code with \mintinline{bash}{mpirun -np 6 hamlet} we see
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{verbatim}
+Hello world! I'm process 1 of 6
+Hello world! I'm process 5 of 6
+Hello world! I'm process 0 of 6
+Hello world! I'm process 3 of 6
+Hello world! I'm process 2 of 6
+Hello world! I'm process 4 of 6
+\end{verbatim}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+	\item<3-> Every processor answers the call,
+	\item<4-> But it answers it as soon as he has done doing the computation! There is \alert{no synchronization}.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{onlyenv}

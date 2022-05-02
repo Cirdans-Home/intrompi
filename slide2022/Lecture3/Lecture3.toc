@@ -1,0 +1,5 @@
+\beamer@sectionintoc {2}{Some advanced instructions}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Derived datatypes}{3}{0}{1}
+\beamer@sectionintoc {3}{Numerical integration of the H\'enon--Heiles model}{44}{0}{2}
+\beamer@sectionintoc {4}{``They're moving in herds. They do move in herds.''}{74}{0}{3}
+\beamer@sectionintoc {5}{Conclusions}{78}{0}{4}

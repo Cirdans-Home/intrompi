@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Scatter}\PYG{p}{(}\PYG{k}{const} \PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{sendbuf}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{sendcount}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{sendtype}\PYG{p}{,} \PYG{k+kt}{void}\PYG{o}{*} \PYG{n}{recvbuf}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{recvcount}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{recvtype}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{root}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Comm} \PYG{n}{comm}\PYG{p}{)}
+\end{Verbatim}

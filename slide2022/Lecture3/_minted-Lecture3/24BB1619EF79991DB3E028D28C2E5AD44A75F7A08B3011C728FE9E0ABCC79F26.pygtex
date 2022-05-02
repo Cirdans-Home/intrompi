@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Type\PYGZus{}contiguous}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{count}\PYG{p}{,} \PYG{n}{MPI\PYGZus{}Datatype} \PYG{n}{oldtype}\PYG{p}{,}
+  \PYG{n}{MPI\PYGZus{}Datatype} \PYG{o}{*}\PYG{n}{newtype}\PYG{p}{)}
+\end{Verbatim}

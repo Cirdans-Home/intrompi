@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{MPI\PYGZus{}Type\PYGZus{}free}\PYG{p}{(}\PYG{n}{MPI\PYGZus{}Datatype} \PYG{o}{*}\PYG{n}{datatype}\PYG{p}{)}
+\end{Verbatim}
