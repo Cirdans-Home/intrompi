@@ -21,17 +21,18 @@ int main(int argc, char *argv[])
     if (myrank == 0){
         MPI_Send(array, 1, subarray, 1, 123, MPI_COMM_WORLD);
     }else if (myrank == 1){
-/*        for (int i=0; i<9; i++)
+        for (int i=0; i<9; i++)
             array[i] = 0;
         MPI_Recv(array, 1, subarray, 0, 123, MPI_COMM_WORLD, &status);
         for (int i=0; i<9; i++)
             printf("array[%d] = %d\n", i, array[i]);
         fflush(stdout);
-*/
+/*
         MPI_Recv(receivearray, 3, MPI_INT, 0, 123, MPI_COMM_WORLD, &status);
         for(int i=0; i<3; i++)
             printf("array[%d] = %d\n", i, receivearray[i]);
         fflush(stdout);
+*/
     }
     MPI_Type_free(&subarray);
     MPI_Finalize();

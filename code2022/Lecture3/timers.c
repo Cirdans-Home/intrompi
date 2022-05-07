@@ -14,6 +14,7 @@ MPI_Comm_size(MPI_COMM_WORLD,&size);
 MPI_Barrier(MPI_COMM_WORLD);
 tic = MPI_Wtime();
 printf("Hello, world.  I am %d of %d\n", myrank, size);
+MPI_Barrier(MPI_COMM_WORLD);
 toc = MPI_Wtime();
 printf("Hello, world.  I am %d of %d and my time is %e\n", myrank, size,toc-tic);
 fflush(stdout);
